@@ -17,7 +17,25 @@ class DecisionTreeClassifier:
     def predict(self, X: MatrixLike) -> ndarray:
         raise NotImplementedError
     
+    def predict_proba(self, X: MatrixLike) -> ndarray:
+        raise NotImplementedError
+    
+    def set_params(self, **params) -> "DecisionTreeClassifier":
+        raise NotImplementedError
+    
     def score(self, X: MatrixLike, Y: MatrixLike) -> float:
+        raise NotImplementedError
+    
+    def decision_path(self, X: MatrixLike) -> spmatrix:
+        raise NotImplementedError
+    
+    def get_depth(self) -> int:
+        raise NotImplementedError
+    
+    def get_n_leaves(self) -> int:
+        raise NotImplementedError
+    
+    def get_params(self) -> dict:
         raise NotImplementedError
 
 class RandomForestClassifier:
@@ -31,6 +49,12 @@ class RandomForestClassifier:
         raise NotImplementedError
     
     def predict_proba(self, X: MatrixLike) -> ndarray:
+        raise NotImplementedError
+    
+    def set_params(self, **params) -> "RandomForestClassifier":
+        raise NotImplementedError
+    
+    def score(self, X: MatrixLike, Y: MatrixLike) -> float:
         raise NotImplementedError
     
     def decision_path(self, X: MatrixLike) -> spmatrix:
