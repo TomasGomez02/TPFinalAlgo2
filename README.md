@@ -1,5 +1,5 @@
 # Trabajo Práctico Final Algoritmos 2
-- Grupo #
+- Grupo 8
 - Integrantes: Arrudi Victoria, Darnes Santiago, Gomez Tomás, Jara Gonzalo, Montti Florencia
 
 ### Enunciado del Problema
