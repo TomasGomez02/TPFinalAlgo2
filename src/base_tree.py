@@ -2,7 +2,7 @@ from _typing import *
 from typing import Optional
 from abc import ABC, abstractmethod
 
-class DecisionBase(ABC):
+class BaseDecision(ABC):
     def __init__(self, attribute, values: ArrayLike):
         self.atribute = attribute
         self.values: ArrayLike = values
@@ -11,17 +11,17 @@ class DecisionBase(ABC):
     def make_choice(self, X: ArrayLike) -> str:
         raise NotImplementedError()
     
-class NumericDecision(DecisionBase):
+class NumericDecision(BaseDecision):
     def make_choice(self, X: ArrayLike) -> str:
         ...
         
-class CategoricDecision(DecisionBase):
+class CategoricDecision(BaseDecision):
     def make_choice(self, X: ArrayLike) -> str:
         ...
 
 class BaseTree:
     def __init__(self, value):
-        self.value: DecisionBase | DecisionResult = value
+        self.value: BaseDecision | DecisionResult = value
         self.forest: dict[str, BaseTree] = dict()
         
     def is_leaf(self):
