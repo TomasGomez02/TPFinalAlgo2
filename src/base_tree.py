@@ -1,5 +1,7 @@
 from _typing import *
 from abc import ABC, abstractmethod
+from typing import Optional, Any
+from collections import Counter
 
 class BaseDecision(ABC):
     def __init__(self, atr_indx: int):
@@ -25,9 +27,10 @@ class CategoricDecision(BaseDecision):
         return X[self.atr_indx]
 
 class BaseTree:
-    def __init__(self, value, data):
-        self.value: BaseDecision | str = value
-        self.data = data
+    def __init__(self, samples: MatrixLike, target: ArrayLike):
+        self.decision: Optional[BaseDecision] = None
+        self.samples = samples
+        self.target = target
         self.forest: dict[str, BaseTree] = dict()
         
     def is_leaf(self):
@@ -41,8 +44,36 @@ class BaseTree:
         
     def insert_tree(self, value: str, tree: "BaseTree"):
         self.forest[value] = tree
+    
+    def get_class(self) -> Any:
+        count =  Counter(self.target)
+        return count.most_common(1)[0][0]
         
     def walkthrough(self, X: ArrayLike):
         if self.is_leaf():
-            return self.value
-        return self.forest[self.value.make_choice(X)].walkthrough(X)
+            return self.get_class()
+        return self.forest[self.decision.make_choice(X)].walkthrough(X)
+    
+    def walkthrough_proba(self, X: ArrayLike):
+        if self.is_leaf():
+            return self.get_class_proportion()
+        return self.forest[self.decision.make_choice(X)].walkthrough_proba(X)
+    
+    def get_class_proportion(self):
+        count =  Counter(self.target)
+        return np.array(list(count.values())) / len(self.target)
+    
+    def __str__(self):
+        def mostrar(t: BaseTree, nivel: int, value_name = ''):
+            tab = '.' * 4
+            indent = tab * nivel
+            out = indent + value_name + ' | '
+            if t.is_leaf():
+                out += str(t.get_class()) + '\n'
+            else:
+                out += str(t.decision.atr_indx) + '\n'
+            for key in t.forest.keys():
+                out += mostrar(t.forest[key], nivel + 1, key)
+            return out
+            
+        return mostrar(self, 0)

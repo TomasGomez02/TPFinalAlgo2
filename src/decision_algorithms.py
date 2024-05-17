@@ -48,7 +48,7 @@ def information_gain(col_values: ArrayLike, Y: ArrayLike) -> float:
         post_entropy += (len(Y_filtered) / len(Y)) * entropy(Y_filtered)
     return pre_entropy - post_entropy
     
-def max_information_gain(X: MatrixLike, Y: ArrayLike) -> int:
+def max_information_gain(X: MatrixLike, Y: ArrayLike) -> tuple[int, float]:
     max = 0, 0.0
     
     for i in range(len(X[0])):
@@ -56,10 +56,8 @@ def max_information_gain(X: MatrixLike, Y: ArrayLike) -> int:
         if ig > max[1]:
             max = i, ig
     
-    return max[0]
-
-def id3(X: MatrixLike, Y: ArrayLike):
-    max_ig_idx = max_information_gain(X, Y)
+    return max
+    
     
 def c4_5(X: MatrixLike, Y: ArrayLike):
     raise NotImplementedError
