@@ -75,16 +75,13 @@ class DecisionTreeClassifier:
         raise NotImplementedError
     
     def get_depth(self) -> int:
-        raise NotImplementedError
+        return self.tree.height()
     
     def get_n_leaves(self) -> int:
         raise NotImplementedError
     
     def get_params(self) -> dict:
         raise NotImplementedError
-    
-    def _create_tree(self, X: MatrixLike):
-        pass
 
 class RandomForestClassifier:
     def __init__(self):
