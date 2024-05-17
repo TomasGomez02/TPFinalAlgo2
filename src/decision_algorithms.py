@@ -2,6 +2,19 @@ import numpy as np
 from _typing import *
 
 def entropy(Y: ArrayLike) -> float:
+    '''
+    Calculates the entropy of a given target array.
+    
+    Parameters
+    ----------
+    Y: ArrayLike 
+        Target column to calculate the entropy of.
+        
+    Returns
+    -------
+    entropy: float
+        Entropy value of the given column.
+    '''
     res = 0
     unique_values = np.unique(Y)
     for value in unique_values:
@@ -12,6 +25,21 @@ def entropy(Y: ArrayLike) -> float:
     return -res
 
 def information_gain(col_values: ArrayLike, Y: ArrayLike) -> float:
+    '''
+    Calculates the information gain of the given feature. 
+    
+    Parameters
+    ----------
+    col_values: ArrayLike
+        Array with values of a certain feature.
+    Y: ArrayLike
+        Array with target values.
+        
+    Returns 
+    -------
+    information_gain: float
+        Information gain value of the given feature. 
+    '''
     pre_entropy = entropy(Y)
     unique_values = np.unique(col_values)
     post_entropy = 0
