@@ -11,6 +11,10 @@ class BaseDecision(ABC):
     def make_choice(self, X: ArrayLike) -> str:
         raise NotImplementedError()
     
+    @abstractmethod
+    def copy(self) -> "BaseDecision":
+        raise NotImplementedError()
+    
 class NumericDecision(BaseDecision):
     def __init__(self, atr_indx, value: float | int):
         super().__init__(atr_indx)
@@ -21,10 +25,19 @@ class NumericDecision(BaseDecision):
         if X[self.atr_indx] <= self.value:
             return self.values[0]
         return self.values[1]
+    
+    def copy(self) -> "NumericDecision":
+        new = NumericDecision(self.atr_indx, self.value)
+        return new
         
 class CategoricDecision(BaseDecision):
     def make_choice(self, X: ArrayLike) -> str:
         return X[self.atr_indx]
+    
+    def copy(self) -> "CategoricDecision":
+        new = CategoricDecision(self.atr_indx)
+        return new
+        
 
 class BaseTree:
     def __init__(self, samples: MatrixLike, target: ArrayLike):
@@ -62,6 +75,20 @@ class BaseTree:
     def get_class_proportion(self):
         count =  Counter(self.target)
         return np.array(list(count.values())) / len(self.target)
+    
+    def copy(self) -> "BaseTree":
+        new = BaseTree(self.samples, self.target)
+        if not self.is_leaf():
+            new.forest = self.forest.copy()
+            new.decision = self.decision.copy()
+        return new
+    
+    def to_leaf(self) -> "BaseTree":
+        leaf = self.copy()
+        if not self.is_leaf():
+            leaf.forest = dict()
+            leaf.decision = None
+        return leaf
     
     def __str__(self):
         def mostrar(t: BaseTree, nivel: int, value_name = ''):

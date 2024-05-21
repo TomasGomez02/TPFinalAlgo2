@@ -10,7 +10,7 @@ from collections import Counter
 
 @dataclass
 class DecisionTreeClassifier:
-    max_depth: Optional[int] = np.inf
+    max_depth: Optional[int | float] = np.inf
     min_samples_split: Optional[int | float] = 2
     min_samples_leaf: Optional[int | float] = 1
     min_impurity_decrease: Optional[float] = 0.0
@@ -38,10 +38,11 @@ class DecisionTreeClassifier:
             self._id3(self.tree)
         else:
             raise NotImplementedError
+        return self
     
     def predict(self, X: MatrixLike) -> ndarray:
         if self.tree is None:
-            raise 'You must call fit() method first.'
+            raise ValueError('You must call fit() method first.')
         X = np.array(X)
         if len(X.shape) == 1:
             return np.array(self.tree.walkthrough(X))
@@ -66,10 +67,21 @@ class DecisionTreeClassifier:
     def set_params(self, **params) -> "DecisionTreeClassifier":
         for key in params.keys():
             self.__setattr__(key, params[key])
+        return self
     
     def score(self, X: MatrixLike, Y: ArrayLike) -> float:
         Y_predict = self.predict(X)
         return np.sum(Y_predict == Y) / len(Y)
+    
+    def prune(self, X: MatrixLike) -> "DecisionTreeClassifier":
+        def inner_prune(current: BaseTree, prev: BaseTree) -> None:
+            has_leaf = False
+            for k, sub in current.forest.items():
+                if sub.is_leaf() and not has_leaf:
+                    pass
+                
+        inner_prune(self.tree, self.tree)
+        return self
     
     def decision_path(self, X: MatrixLike) -> spmatrix:
         raise NotImplementedError
