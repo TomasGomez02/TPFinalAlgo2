@@ -59,7 +59,7 @@ class BaseTree:
         self.forest[value] = tree
     
     def get_class(self) -> Any:
-        count =  Counter(self.target)
+        count = Counter(self.target)
         return count.most_common(1)[0][0]
         
     def walkthrough(self, X: ArrayLike):

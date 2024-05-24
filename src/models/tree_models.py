@@ -7,9 +7,10 @@ from dataclasses import dataclass
 import decision_algorithms as da
 from base_tree import BaseTree, CategoricDecision, NumericDecision
 from collections import Counter
+from models.model import Model
 
 @dataclass
-class DecisionTreeClassifier:
+class DecisionTreeClassifier(Model):
     max_depth: Optional[int | float] = np.inf
     min_samples_split: Optional[int | float] = 2
     min_samples_leaf: Optional[int | float] = 1
@@ -54,7 +55,7 @@ class DecisionTreeClassifier:
 
     def predict_proba(self, X: MatrixLike) -> ndarray:
         if self.tree is None:
-            raise 'You must call fit() method first.'
+            raise ValueError('You must call fit() method first.')
         X = np.array(X)
         if len(X.shape) == 1:
             return np.array(self.tree.walkthrough_proba(X))
@@ -95,7 +96,7 @@ class DecisionTreeClassifier:
     def get_params(self) -> dict:
         raise NotImplementedError
 
-class RandomForestClassifier:
+class RandomForestClassifier(Model):
     def __init__(self):
         raise NotImplementedError
     
