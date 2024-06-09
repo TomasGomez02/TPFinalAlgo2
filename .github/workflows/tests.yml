@@ -1,0 +1,24 @@
+name: Tests
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: set up python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12.x'
+      
+    - name: install dependencies
+      run: |
+        pip install --upgrade pip
+        pip install -r ./requirements.txt
+        pip install -r ./requirements_dev.txt
+        pip install -e .
+    - name: testing
+      run: |
+        pytest

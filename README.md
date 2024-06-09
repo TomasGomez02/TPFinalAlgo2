@@ -9,3 +9,5 @@ Se desea construir una librería que permita construir modelos predictivos a tra
 - [Documentación de Sklearn para estimadores compatibles.](https://scikit-learn.org/stable/developers/develop.html)
 - [Documentacion de `sklearn.tree.DecisionTreeClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html#sklearn.tree.DecisionTreeClassifier)
 - [Documentación de `sklearn.ensemble.RandomForestClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier)
+
+![Tests](https://github.com/GonzaJara/TPFinalAlgo2Fork/actions/workflows/tests.yml/badge.svg)

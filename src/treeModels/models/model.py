@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from _typing import *
+from treeModels._typing import *
 
 class Model(ABC):
     @abstractmethod

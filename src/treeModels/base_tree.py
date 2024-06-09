@@ -1,4 +1,4 @@
-from _typing import *
+from treeModels._typing import *
 from abc import ABC, abstractmethod
 from typing import Optional, Any
 from collections import Counter
