@@ -42,7 +42,7 @@ class DecisionTreeClassifier(Model):
         return self
     
     def predict(self, X: MatrixLike) -> ndarray:
-        if self.tree is None:
+        if not hasattr(self, "tree"):
             raise ValueError('You must call fit() method first.')
         X = np.array(X)
         if len(X.shape) == 1:
@@ -54,7 +54,7 @@ class DecisionTreeClassifier(Model):
             return np.array(res)
 
     def predict_proba(self, X: MatrixLike) -> ndarray:
-        if self.tree is None:
+        if not hasattr(self, "tree"):
             raise ValueError('You must call fit() method first.')
         X = np.array(X)
         if len(X.shape) == 1:
@@ -67,7 +67,8 @@ class DecisionTreeClassifier(Model):
     
     def set_params(self, **params) -> "DecisionTreeClassifier":
         for key in params.keys():
-            self.__setattr__(key, params[key])
+            if hasattr(self, key):
+                self.__setattr__(key, params[key])
         return self
     
     def score(self, X: MatrixLike, Y: ArrayLike) -> float:
@@ -91,7 +92,9 @@ class DecisionTreeClassifier(Model):
         return self.tree.height()
     
     def get_n_leaves(self) -> int:
-        raise NotImplementedError
+        if not hasattr(self, "tree"):
+            raise ValueError('You must call fit() method first.')
+        
     
     def get_params(self) -> dict:
         raise NotImplementedError

@@ -90,6 +90,14 @@ class BaseTree:
             leaf.decision = None
         return leaf
     
+    def get_n_leaves(self) -> int:
+        if self.is_leaf():
+            return 1
+        leaves = 0
+        for key in self.forest.keys():
+            leaves += self.forest[key].get_n_leaves()
+        return leaves
+    
     def __str__(self):
         def mostrar(t: BaseTree, nivel: int, value_name = ''):
             tab = '.' * 4

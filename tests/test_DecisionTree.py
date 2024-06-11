@@ -8,6 +8,7 @@ def test_overfitted(X, Y):
     overFittedTree.fit(X.iloc[2:, :], Y[2:])
     assert overFittedTree.get_depth() == 5
     assert Counter(overFittedTree.predict(X.loc[0:2,:])) == {"No":2, "Yes":1}
+    assert overFittedTree.get_n_leaves() == None
     # overFittedTree.predict_proba() == ???
 
 def test_params(X, Y):
@@ -31,3 +32,6 @@ def test_Exceptions_Errors(X, Y):
     overFittedTree = DecisionTreeClassifier()
     with pytest.raises(ValueError):
         overFittedTree.predict(X)
+    overFittedTree.set_params(nombre="gonza")
+    with pytest.raises(AttributeError):
+        overFittedTree.nombre
