@@ -28,13 +28,13 @@ class DecisionTreeClassifier(Model):
             filter_values = current_node.samples[:, max_ig_idx] == col_value
             filtered_samples = current_node.samples[filter_values]
             filtered_target = current_node.target[filter_values]
-            new_tree = BaseTree(filtered_samples, filtered_target)
+            new_tree = BaseTree(filtered_samples, filtered_target, current_node.classes)
             current_node.insert_tree(col_value, new_tree)
             self._id3(new_tree, current_height + 1)
         
     
     def fit(self, X: MatrixLike, Y: ArrayLike) -> "DecisionTreeClassifier":
-        self.tree = BaseTree(np.array(X), np.array(Y))
+        self.tree = BaseTree(np.array(X), np.array(Y), np.unique(Y))
         if self.algorithm == "ID3":
             self._id3(self.tree)
         else:
