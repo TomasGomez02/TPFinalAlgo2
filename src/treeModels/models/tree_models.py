@@ -65,7 +65,7 @@ class DecisionTreeClassifier(Model):
         self: DecisionTreeClassifier
             The fitted decision tree classifier instance.
         '''    
-        self.tree = BaseTree(np.array(X), np.array(Y))
+        self.tree = BaseTree(np.array(X), np.array(Y), np.unique(Y))
         if self.algorithm == "ID3":
             self._id3(self.tree)
         else:
@@ -226,7 +226,9 @@ class DecisionTreeClassifier(Model):
             If the `fit` method has not been called before calling `get_n_leaves`.
         '''
         if not hasattr(self, "tree"):
-            raise ValueError('You must call fit() method first.')    
+            raise ValueError('You must call fit() method first.')
+        return self.tree.get_n_leaves()
+        
     
     def get_params(self) -> dict:
         raise NotImplementedError
