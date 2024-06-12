@@ -9,7 +9,7 @@ from treeModels.base_tree import BaseTree, CategoricDecision, NumericDecision
 from collections import Counter
 from treeModels.models.model import Model
 
-@dataclass
+@dataclass(repr=False, eq=False)
 class DecisionTreeClassifier(Model):
     max_depth: Optional[int | float] = np.inf
     min_samples_split: Optional[int | float] = 2
@@ -94,14 +94,24 @@ class DecisionTreeClassifier(Model):
     def get_n_leaves(self) -> int:
         if not hasattr(self, "tree"):
             raise ValueError('You must call fit() method first.')
+        return self.tree.get_n_leaves()
         
     
     def get_params(self) -> dict:
         raise NotImplementedError
 
+@dataclass(repr=False, eq=False)
 class RandomForestClassifier(Model):
-    def __init__(self):
-        raise NotImplementedError
+    n_estimators: int = 100
+    max_depth: Optional[int | float] = np.inf
+    min_samples_split: Optional[int | float] = 2
+    min_samples_leaf: Optional[int | float] = 1
+    min_impurity_decrease: Optional[float] = 0.0
+    algorithm: Literal['ID3', 'C4.5'] = 'ID3'
+    bootstrap: bool = True
+    max_features: Literal['sqrt', 'log2', None] = 'sqrt'
+    max_samples: int | float | None = None
+    random_state: int | None = None
     
     def fit(self, X: MatrixLike, Y: ArrayLike) -> "RandomForestClassifier":
         raise NotImplementedError
