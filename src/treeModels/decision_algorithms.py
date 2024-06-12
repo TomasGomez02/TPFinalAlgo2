@@ -93,7 +93,7 @@ def id3(current_node: BaseTree, params: dict, current_height: int = 1):
             id3(new_tree, params, current_height + 1)
             
 def c45(current_node: BaseTree, params: dict, current_height: int = 1):
-    
+    raise NotImplementedError
             
 class DecisionAlgorithm(Enum):
     ID3 = partial(id3)
