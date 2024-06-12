@@ -233,7 +233,7 @@ class BaseTree:
         return self.forest[self.decision.make_choice(X)].walkthrough_proba(X)
     
     def get_class_proportion(self):
-    	"""
+        """
         Gets the proportions of each class in the target values.
 
         Returns
