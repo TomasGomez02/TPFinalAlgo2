@@ -113,8 +113,59 @@ class RandomForestClassifier(Model):
     max_samples: int | float | None = None
     random_state: int | None = None
     
+    def _plant_forest(self):
+        self.forest = [DecisionTreeClassifier(self.max_depth, self.min_samples_split, self.min_samples_leaf, self.min_impurity_decrease, self.algorithm) for i in range(self.n_estimators)]
+    
+    def _generate_random_samples(self, X: MatrixLike, Y: ArrayLike) -> tuple[MatrixLike, ArrayLike]:
+        n_samples = X.shape[0]
+        if isinstance(self.max_samples, int):
+            n_samples = self.max_samples
+        elif isinstance(self.max_samples, float):
+            n_samples = round(n_samples * max(min(self.max_samples, 1.0), 0.0))
+            
+        indices = [i for i in range(len(X))]
+        np.random.RandomState(seed=self.random_state)
+        random_indices = np.random.choice(indices, n_samples, True)
+        
+        random_X = [X[i] for i in random_indices]
+        random_Y = [Y[i] for i in random_indices]
+        return np.array(random_X), np.array(random_Y)
+    
+    def _generate_random_features(self, n_cols) -> ndarray:
+        if self.max_features == 'sqrt':
+            n_features = round(np.sqrt(n_cols))
+        elif self.max_features == 'log2':
+            n_features = round(np.log2(n_cols))
+        else:
+            n_features = n_cols
+            
+        indices = [i for i in range(n_cols)]
+        
+        if n_features == n_cols:
+            return np.array(indices)
+        
+        return np.sort(np.random.choice(indices, n_features, False))
+    
+    def _select_features(self, X: MatrixLike, features: ArrayLike) -> MatrixLike:
+        return np.array([X[:,i] if i in features else np.array(['' for index in range(X.shape[0])]) for i in range(X.shape[1])]).T
+            
     def fit(self, X: MatrixLike, Y: ArrayLike) -> "RandomForestClassifier":
-        raise NotImplementedError
+        self._plant_forest()
+        
+        X_array = np.array(X)
+        Y_array = np.array(Y)
+        
+        for i in range(self.n_estimators):
+            X_random_sample, Y_random_sample = self._generate_random_samples(X_array, Y_array)
+            
+            if self.bootstrap:
+                features = self._generate_random_features(X_array.shape[1])
+
+                X_random_sample = self._select_features(X_random_sample, features)
+
+            self.forest[i].fit(X_random_sample, Y_random_sample)
+        
+        return self
     
     def predict(self, X: MatrixLike) -> ndarray:
         raise NotImplementedError

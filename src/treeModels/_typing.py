@@ -3,5 +3,5 @@ import pandas as pd
 import numpy.typing
 from scipy.sparse import spmatrix
 
-ArrayLike = numpy.typing.ArrayLike
+ArrayLike = list | np.ndarray | pd.DataFrame
 MatrixLike = np.ndarray | pd.DataFrame
