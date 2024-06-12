@@ -40,10 +40,11 @@ class CategoricDecision(BaseDecision):
         
 
 class BaseTree:
-    def __init__(self, samples: MatrixLike, target: ArrayLike):
+    def __init__(self, samples: MatrixLike, target: ArrayLike, classes: ArrayLike):
         self.decision: Optional[BaseDecision] = None
         self.samples = samples
         self.target = target
+        self.classes = classes
         self.forest: dict[str, BaseTree] = dict()
         
     def is_leaf(self):
@@ -63,21 +64,23 @@ class BaseTree:
         return count.most_common(1)[0][0]
         
     def walkthrough(self, X: ArrayLike):
-        if self.is_leaf():
+        if self.is_leaf() or not X[self.decision.atr_indx] in self.forest.keys():
             return self.get_class()
         return self.forest[self.decision.make_choice(X)].walkthrough(X)
     
     def walkthrough_proba(self, X: ArrayLike):
-        if self.is_leaf():
+        if self.is_leaf() or not X[self.decision.atr_indx] in self.forest.keys():
             return self.get_class_proportion()
         return self.forest[self.decision.make_choice(X)].walkthrough_proba(X)
     
     def get_class_proportion(self):
-        count =  Counter(self.target)
+        count = {cls: 0 for cls in self.classes}
+        for y in self.target:
+            count[y] += 1
         return np.array(list(count.values())) / len(self.target)
     
     def copy(self) -> "BaseTree":
-        new = BaseTree(self.samples, self.target)
+        new = BaseTree(self.samples, self.target, self.classes)
         if not self.is_leaf():
             new.forest = self.forest.copy()
             new.decision = self.decision.copy()
