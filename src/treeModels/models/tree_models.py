@@ -2,7 +2,7 @@ from treeModels._typing import MatrixLike, ArrayLike
 from scipy.sparse import spmatrix
 from numpy import ndarray
 import numpy as np
-from typing import Optional, Literal
+from typing import Optional, Literal, Any
 from dataclasses import dataclass
 import treeModels.decision_algorithms as da
 from treeModels.base_tree import BaseTree, CategoricDecision, NumericDecision
@@ -229,9 +229,11 @@ class DecisionTreeClassifier(Model):
             raise ValueError('You must call fit() method first.')
         return self.tree.get_n_leaves()
         
-    
     def get_params(self) -> dict:
-        raise NotImplementedError
+        params = self.__dict__
+        if "tree" in params.keys():
+            params.pop("tree")
+        return params
 
 class RandomForestClassifier(Model):
     def __init__(self):
