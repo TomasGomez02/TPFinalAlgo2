@@ -130,16 +130,16 @@ class CategoricDecision(BaseDecision):
 
 class BaseTree:
     def __init__(self, samples: MatrixLike, target: ArrayLike, classes: ArrayLike):
-    """
-    A tree structure for making decisions based on the given samples and target values.
+        """
+        A tree structure for making decisions based on the given samples and target values.
 
-    Parameters
-    ----------
-    samples : MatrixLike
-        A matrix-like structure containing the samples used for training the tree.
-    target : ArrayLike
-        An array-like structure containing the target values corresponding to the samples.
-    """
+        Parameters
+        ----------
+        samples : MatrixLike
+            A matrix-like structure containing the samples used for training the tree.
+        target : ArrayLike
+            An array-like structure containing the target values corresponding to the samples.
+        """
  
         self.decision: Optional[BaseDecision] = None
         self.samples = samples
@@ -234,7 +234,7 @@ class BaseTree:
         return self.forest[self.decision.make_choice(X)].walkthrough_proba(X)
     
     def get_class_proportion(self):
-    	"""
+        """
         Gets the proportions of each class in the target values.
 
         Returns
