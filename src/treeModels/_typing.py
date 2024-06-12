@@ -4,4 +4,4 @@ import numpy.typing
 from scipy.sparse import spmatrix
 
 ArrayLike = numpy.typing.ArrayLike
-MatrixLike = np.ndarray | pd.DataFrame | spmatrix
+MatrixLike = np.ndarray | pd.DataFrame
