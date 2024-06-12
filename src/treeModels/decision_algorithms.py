@@ -51,10 +51,25 @@ def information_gain(col_values: ArrayLike, Y: ArrayLike) -> float:
         Y_filtered = [y for i, y in enumerate(Y) if col_values[i] == value]
         post_entropy += (len(Y_filtered) / len(Y)) * entropy(Y_filtered)
     return pre_entropy - post_entropy
+
     
 def max_information_gain(X: MatrixLike, Y: ArrayLike) -> tuple[int, float]:
-    max = 0, 0.0
+    '''
+    Calculates the information gain for each feature in the dataset and returns the feature with the maximum information gain.
     
+    Parameters
+    ----------
+    X: MatrixLike
+        Matrix-like array with feature values, where each column represents a feature.
+    Y: ArrayLike
+        Array with target values.
+        
+    Returns 
+    -------
+    max_information_gain: tuple[int, float]
+        A tuple containing the index of the feature with the highest information gain and the information gain value. 
+    '''
+    max = 0, 0.0
     for i in range(len(X[0])):
         ig = information_gain(X[:, i], Y)
         if ig > max[1]:

@@ -2,7 +2,7 @@ from treeModels._typing import MatrixLike, ArrayLike
 from scipy.sparse import spmatrix
 from numpy import ndarray
 import numpy as np
-from typing import Optional, Literal
+from typing import Optional, Literal, Any
 from dataclasses import dataclass
 from treeModels.decision_algorithms import DecisionAlgorithm
 from treeModels.base_tree import BaseTree
@@ -18,11 +18,45 @@ class DecisionTreeClassifier(Model):
     algorithm: DecisionAlgorithm = DecisionAlgorithm.ID3
         
     def fit(self, X: MatrixLike, Y: ArrayLike) -> "DecisionTreeClassifier":
+        '''
+        Fits the decision tree classifier to the provided data.
+
+        Parameters
+        ----------
+        X: MatrixLike
+            The input data matrix where each row represents a sample and each column represents a feature.
+        Y: ArrayLike
+            The target values corresponding to the input data.
+
+        Returns
+        -------
+        self: DecisionTreeClassifier
+            The fitted decision tree classifier instance.
+        '''    
         self.tree = BaseTree(np.array(X), np.array(Y), np.unique(Y))
         self.algorithm(self.tree, self.get_params())
         return self
     
     def predict(self, X: MatrixLike) -> ndarray:
+        '''
+        Predicts the target values for the given input data using the fitted decision tree.
+
+        Parameters
+        ----------
+        X: MatrixLike
+            The input data matrix where each row represents a sample and each column represents a feature.
+            If a single sample is provided, it should be a 1D array.
+
+        Returns
+        -------
+        predictions: ndarray
+            An array of predicted target values corresponding to the input data.
+
+        Raises
+        ------
+        ValueError
+            If the `fit` method has not been called before calling `predict`.
+        '''    
         if not hasattr(self, "tree"):
             raise ValueError('You must call fit() method first.')
         X = np.array(X)
@@ -35,6 +69,26 @@ class DecisionTreeClassifier(Model):
             return np.array(res)
 
     def predict_proba(self, X: MatrixLike) -> ndarray:
+        '''
+        Predicts the probability distribution of the target values for the given input data using the fitted decision tree.
+
+        Parameters
+        ----------
+        X: MatrixLike
+            The input data matrix where each row represents a sample and each column represents a feature.
+            If a single sample is provided, it should be a 1D array.
+
+        Returns
+        -------
+        probabilities: ndarray
+            An array of probability distributions corresponding to the input data. Each element in the array 
+            is a list of probabilities for each class.
+
+        Raises
+        ------
+        ValueError
+            If the `fit` method has not been called before calling `predict_proba`.
+        '''    
         if not hasattr(self, "tree"):
             raise ValueError('You must call fit() method first.')
         X = np.array(X)
@@ -47,16 +101,58 @@ class DecisionTreeClassifier(Model):
             return np.array(res)
     
     def set_params(self, **params) -> "DecisionTreeClassifier":
+        '''
+        Sets the parameters of the DecisionTreeClassifier.
+
+        Parameters
+        ----------
+        **params: dict
+            A dictionary of parameter names and their corresponding values to set in the classifier.
+            
+        Returns
+        -------
+        self: DecisionTreeClassifier
+            The instance of the classifier with updated parameters.
+        '''    
         for key in params.keys():
             if hasattr(self, key):
                 self.__setattr__(key, params[key])
         return self
     
     def score(self, X: MatrixLike, Y: ArrayLike) -> float:
+        '''
+        Computes the accuracy of the classifier on the given test data and labels.
+
+        Parameters
+        ----------
+        X: MatrixLike
+            The input data matrix where each row represents a sample and each column represents a feature.
+        Y: ArrayLike
+            The true target values corresponding to the input data.
+
+        Returns
+        -------
+        accuracy: float
+            The accuracy of the classifier, defined as the ratio of correctly predicted samples 
+            to the total number of samples.
+        '''
         Y_predict = self.predict(X)
         return np.sum(Y_predict == Y) / len(Y)
     
     def prune(self, X: MatrixLike) -> "DecisionTreeClassifier":
+        '''
+        Prunes the decision tree to prevent overfitting by removing nodes that do not improve performance on the given data.
+
+        Parameters
+        ----------
+        X: MatrixLike
+            The input data matrix where each row represents a sample and each column represents a feature.
+
+        Returns
+        -------
+        self: DecisionTreeClassifier
+            The instance of the classifier with the pruned decision tree.
+        '''
         def inner_prune(current: BaseTree, prev: BaseTree) -> None:
             has_leaf = False
             for k, sub in current.forest.items():
@@ -70,16 +166,39 @@ class DecisionTreeClassifier(Model):
         raise NotImplementedError
     
     def get_depth(self) -> int:
+        '''
+        Returns the depth of the decision tree.
+
+        Returns
+        -------
+        depth: int
+            The depth of the decision tree, defined as the maximum depth from the root node to any leaf node.
+        '''
         return self.tree.height()
     
     def get_n_leaves(self) -> int:
+        '''
+        Returns the number of leaves in the decision tree.
+
+        Returns
+        -------
+        n_leaves: int
+            The number of leaf nodes in the decision tree.
+
+        Raises
+        ------
+        ValueError
+            If the `fit` method has not been called before calling `get_n_leaves`.
+        '''
         if not hasattr(self, "tree"):
             raise ValueError('You must call fit() method first.')
         return self.tree.get_n_leaves()
         
-    #TODO: para gonza
     def get_params(self) -> dict:
-        raise NotImplementedError
+        params = self.__dict__
+        if "tree" in params.keys():
+            params.pop("tree")
+        return params
 
 @dataclass(repr=False, eq=False)
 class RandomForestClassifier(Model):
