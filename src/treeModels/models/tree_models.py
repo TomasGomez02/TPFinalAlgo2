@@ -94,6 +94,7 @@ class DecisionTreeClassifier(Model):
     def get_n_leaves(self) -> int:
         if not hasattr(self, "tree"):
             raise ValueError('You must call fit() method first.')
+        return self.tree.get_n_leaves()
         
     
     def get_params(self) -> dict:
