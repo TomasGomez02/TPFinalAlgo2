@@ -130,17 +130,16 @@ class CategoricDecision(BaseDecision):
 
 class BaseTree:
     def __init__(self, samples: MatrixLike, target: ArrayLike, classes: ArrayLike):
-    """
-    A tree structure for making decisions based on the given samples and target values.
+        """
+        A tree structure for making decisions based on the given samples and target values.
 
-    Parameters
-    ----------
-    samples : MatrixLike
-        A matrix-like structure containing the samples used for training the tree.
-    target : ArrayLike
-        An array-like structure containing the target values corresponding to the samples.
-    """
- 
+        Parameters
+        ----------
+        samples : MatrixLike
+            A matrix-like structure containing the samples used for training the tree.
+        target : ArrayLike
+            An array-like structure containing the target values corresponding to the samples.
+        """
         self.decision: Optional[BaseDecision] = None
         self.samples = samples
         self.target = target
@@ -278,6 +277,14 @@ class BaseTree:
         return leaf
     
     def get_n_leaves(self) -> int:
+        """
+        Computes the number of leaf nodes in the tree.
+
+        Returns
+        -------
+        n_leaves : int
+            The number of leaf nodes in the tree.
+        """
         if self.is_leaf():
             return 1
         leaves = 0
