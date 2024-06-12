@@ -113,9 +113,9 @@ class DecisionTreeClassifier(Model):
         -------
         self: DecisionTreeClassifier
             The instance of the classifier with updated parameters.
-        '''    
+        '''
         for key in params.keys():
-            if hasattr(self, key):
+            if hasattr(self, key) and key != "tree":
                 self.__setattr__(key, params[key])
         return self
     
@@ -309,7 +309,7 @@ class RandomForestClassifier(Model):
     
     def set_params(self, **params) -> "RandomForestClassifier":
         for key in params.keys():
-            if hasattr(self, key):
+            if hasattr(self, key) and key != "forest":
                 self.__setattr__(key, params[key])
         return self
     
@@ -320,9 +320,11 @@ class RandomForestClassifier(Model):
     def decision_path(self, X: MatrixLike) -> spmatrix:
         raise NotImplementedError
     
-    #TODO: para gonza
     def get_params(self) -> dict: 
-        raise NotImplementedError
+        params = self.__dict__.copy()
+        if "forest" in params.keys():
+            params.pop("forest")
+        return params
 
 def main():
     pass
