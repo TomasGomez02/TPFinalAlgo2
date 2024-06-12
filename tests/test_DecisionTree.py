@@ -10,16 +10,22 @@ def test_overfitted(X, Y):
     assert Counter(model.predict(X.loc[0:2,:])) == {"No":2, "Yes":1}
     assert model.get_n_leaves() == 11
     assert model.predict_proba(X).shape == (19, 2)
+    assert DecisionTreeClassifier().fit(X.iloc[0:1,:], Y.iloc[0:1]).score(X.iloc[0:1,:], Y.iloc[0:1]) == 1
+    
 
 def test_params(X, Y):
     assert DecisionTreeClassifier(max_depth=3).fit(X, Y).get_depth() == 3
     assert len(DecisionTreeClassifier(min_samples_split=3)
                .fit(X, Y).tree.forest["Overcast"].samples) >= 3
     assert len(DecisionTreeClassifier(min_samples_split=5).fit(X, Y).tree.samples) >= 5
+    params = {"max_depth":200, "min_samples_split":9, "min_samples_leaf":10,
+    "min_impurity_decrease": 1, "algorithm":"C4.5"}
+    assert DecisionTreeClassifier().set_params(**params).get_params() == params
     # falta algo que vea min_samples_leaf mejor
 
 @pytest.mark.xfail
 def test_C4_5():
+    # Hay que completar este test
     df = pd.read_csv("CarEval.csv")
     X = df.drop("class values", axis=1)
     Y = df["class values"]
