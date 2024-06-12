@@ -1,5 +1,9 @@
 import numpy as np
 from treeModels._typing import *
+from enum import Enum
+from base_tree import BaseTree, CategoricDecision, NumericDecision
+from collections import Counter
+from functools import partial
 
 def entropy(Y: ArrayLike) -> float:
     '''
@@ -57,7 +61,28 @@ def max_information_gain(X: MatrixLike, Y: ArrayLike) -> tuple[int, float]:
             max = i, ig
     
     return max
-    
-    
-def c4_5(X: MatrixLike, Y: ArrayLike):
+
+def id3(current_node: BaseTree, params: dict, current_height: int = 1):
+        max_ig_idx, info_gain = max_information_gain(current_node.samples, current_node.target)
+        least_common_amount = Counter(current_node.samples[:, max_ig_idx]).most_common()[-1][1]
+        if params['max_depth'] <= current_height or params['min_samples_split'] > len(current_node.samples) or params['min_samples_leaf'] > least_common_amount or params['min_impurity_decrease'] > info_gain or info_gain == 0.0:
+            return
+        
+        current_node.decision = CategoricDecision(max_ig_idx)
+        for col_value in np.unique(current_node.samples[:, max_ig_idx]):
+            filter_values = current_node.samples[:, max_ig_idx] == col_value
+            filtered_samples = current_node.samples[filter_values]
+            filtered_target = current_node.target[filter_values]
+            new_tree = BaseTree(filtered_samples, filtered_target, current_node.classes)
+            current_node.insert_tree(col_value, new_tree)
+            id3(new_tree, params, current_height + 1)
+            
+def c45(current_node: BaseTree, params: dict, current_height: int = 1):
     raise NotImplementedError
+            
+class DecisionAlgorithm(Enum):
+    ID3 = partial(id3)
+    C45 = partial(c45)
+    
+    def __call__(self, *args):
+        self.value(*args)
