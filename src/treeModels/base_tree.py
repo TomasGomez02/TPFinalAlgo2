@@ -4,43 +4,143 @@ from typing import Optional, Any
 from collections import Counter
 
 class BaseDecision(ABC):
+    """
+    Abstract base class for decision-making based on a specific attribute index.
+
+    Parameters
+    ----------
+    atr_indx : int
+        Index of the attribute based on which the decision is made.
+    """
     def __init__(self, atr_indx: int):
         self.atr_indx = atr_indx
     
     @abstractmethod
     def make_choice(self, X: ArrayLike) -> str:
+        """
+        Makes a decision based on the attribute at the given index.
+
+        Parameters
+        ----------
+        X : ArrayLike
+            Array-like structure containing the data for making the decision.
+
+        Returns
+        -------
+        choice : str
+            The decision made based on the attribute.
+        """
         raise NotImplementedError()
     
     @abstractmethod
     def copy(self) -> "BaseDecision":
+        """
+        Creates a copy of the decision-making instance.
+
+        Returns
+        -------
+        decision_copy : BaseDecision
+            A copy of the current decision-making instance.
+        """
         raise NotImplementedError()
     
 class NumericDecision(BaseDecision):
+    """
+    Decision-making class for numerical attributes based on a threshold value.
+
+    Parameters
+    ----------
+    atr_indx : int
+        Index of the attribute based on which the decision is made.
+    value : float or int
+        Threshold value for making the decision.
+    """
     def __init__(self, atr_indx, value: float | int):
         super().__init__(atr_indx)
         self.value = value
         self.values = [f'<={value}', f'>{value}']
     
     def make_choice(self, X: ArrayLike) -> str:
+        """
+        Makes a decision based on whether the attribute value is less than or equal to the threshold.
+
+        Parameters
+        ----------
+        X : ArrayLike
+            Array-like structure containing the data for making the decision.
+
+        Returns
+        -------
+        choice : str
+            The decision made based on whether the attribute value is less than or equal to the threshold.
+        """
         if X[self.atr_indx] <= self.value:
             return self.values[0]
         return self.values[1]
     
     def copy(self) -> "NumericDecision":
+        """
+        Creates a copy of the NumericDecision instance.
+
+        Returns
+        -------
+        decision_copy : NumericDecision
+            A copy of the current NumericDecision instance.
+        """
         new = NumericDecision(self.atr_indx, self.value)
         return new
         
 class CategoricDecision(BaseDecision):
+    """
+    Decision-making class for categorical attributes.
+
+    Parameters
+    ----------
+    atr_indx : int
+        Index of the attribute based on which the decision is made.
+    """
     def make_choice(self, X: ArrayLike) -> str:
+        """
+        Makes a decision based on the categorical value of the attribute at the given index.
+
+        Parameters
+        ----------
+        X : ArrayLike
+            Array-like structure containing the data for making the decision.
+
+        Returns
+        -------
+        choice : str
+            The categorical value of the attribute at the specified index.
+        """
         return X[self.atr_indx]
     
     def copy(self) -> "CategoricDecision":
+        """
+        Creates a copy of the CategoricDecision instance.
+
+        Returns
+        -------
+        decision_copy : CategoricDecision
+            A copy of the current CategoricDecision instance.
+        """
         new = CategoricDecision(self.atr_indx)
         return new
         
 
 class BaseTree:
     def __init__(self, samples: MatrixLike, target: ArrayLike, classes: ArrayLike):
+    """
+    A tree structure for making decisions based on the given samples and target values.
+
+    Parameters
+    ----------
+    samples : MatrixLike
+        A matrix-like structure containing the samples used for training the tree.
+    target : ArrayLike
+        An array-like structure containing the target values corresponding to the samples.
+    """
+ 
         self.decision: Optional[BaseDecision] = None
         self.samples = samples
         self.target = target
@@ -48,38 +148,114 @@ class BaseTree:
         self.forest: dict[str, BaseTree] = dict()
         
     def is_leaf(self):
+        """
+        Checks if the current node is a leaf node.
+
+        Returns
+        -------
+        is_leaf : bool
+            True if the current node is a leaf, False otherwise.
+        """
         return self.forest == {}
     
     def height(self):
+        """
+        Computes the height of the tree.
+
+        Returns
+        -------
+        height : int
+            The height of the tree.
+        """
         if self.is_leaf():
             return 1
         else:
             return 1 + max([self.forest[key].height() for key in self.forest.keys()])
         
     def insert_tree(self, value: str, tree: "BaseTree"):
+        """
+        Inserts a subtree into the current tree.
+
+        Parameters
+        ----------
+        value : str
+            The value associated with the subtree.
+        tree : BaseTree
+            The subtree to be inserted.
+        """
         self.forest[value] = tree
     
     def get_class(self) -> Any:
+        """
+        Gets the most common class in the target values.
+
+        Returns
+        -------
+        most_common_class : Any
+            The most common class in the target values.
+        """
         count = Counter(self.target)
         return count.most_common(1)[0][0]
         
     def walkthrough(self, X: ArrayLike):
+        """
+        Walks through the tree to make a prediction based on the given input.
+
+        Parameters
+        ----------
+        X : ArrayLike
+            An array-like structure containing the input data.
+
+        Returns
+        -------
+        prediction : Any
+            The predicted class for the given input.
+        """
         if self.is_leaf() or not X[self.decision.atr_indx] in self.forest.keys():
             return self.get_class()
         return self.forest[self.decision.make_choice(X)].walkthrough(X)
     
     def walkthrough_proba(self, X: ArrayLike):
+        """
+        Walks through the tree to get the class proportions based on the given input.
+
+        Parameters
+        ----------
+        X : ArrayLike
+            An array-like structure containing the input data.
+
+        Returns
+        -------
+        class_proportions : np.ndarray
+            The class proportions for the given input.
+        """
         if self.is_leaf() or not X[self.decision.atr_indx] in self.forest.keys():
             return self.get_class_proportion()
         return self.forest[self.decision.make_choice(X)].walkthrough_proba(X)
     
     def get_class_proportion(self):
+    	"""
+        Gets the proportions of each class in the target values.
+
+        Returns
+        -------
+        class_proportions : np.ndarray
+            An array of class proportions.
+        """
         count = {cls: 0 for cls in self.classes}
         for y in self.target:
             count[y] += 1
         return np.array(list(count.values())) / len(self.target)
     
     def copy(self) -> "BaseTree":
+        """
+        Creates a copy of the current tree.
+
+        Returns
+        -------
+        tree_copy : BaseTree
+            A copy of the current tree.
+        """
         new = BaseTree(self.samples, self.target, self.classes)
         if not self.is_leaf():
             new.forest = self.forest.copy()
@@ -87,6 +263,14 @@ class BaseTree:
         return new
     
     def to_leaf(self) -> "BaseTree":
+        """
+        Converts the current tree to a leaf node.
+
+        Returns
+        -------
+        leaf : BaseTree
+            A copy of the current tree as a leaf node.
+        """
         leaf = self.copy()
         if not self.is_leaf():
             leaf.forest = dict()
@@ -102,6 +286,14 @@ class BaseTree:
         return leaves
     
     def __str__(self):
+        """
+        Returns a string representation of the tree.
+
+        Returns
+        -------
+        tree_str : str
+            A string representation of the tree.
+        """
         def mostrar(t: BaseTree, nivel: int, value_name = ''):
             tab = '.' * 4
             indent = tab * nivel
