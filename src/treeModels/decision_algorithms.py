@@ -1,7 +1,7 @@
 import numpy as np
 from treeModels._typing import *
 from enum import Enum
-from base_tree import BaseTree, CategoricDecision, NumericDecision
+from treeModels.base_tree import BaseTree, CategoricDecision, NumericDecision
 from collections import Counter
 from functools import partial
 
@@ -16,7 +16,7 @@ def entropy(Y: ArrayLike) -> float:
         
     Returns
     -------
-    entropy: float
+    entropy: 
         Entropy value of the given column.
     '''
     res = 0
@@ -93,7 +93,7 @@ def id3(current_node: BaseTree, params: dict, current_height: int = 1):
             id3(new_tree, params, current_height + 1)
             
 def c45(current_node: BaseTree, params: dict, current_height: int = 1):
-    raise NotImplementedError
+    
             
 class DecisionAlgorithm(Enum):
     ID3 = partial(id3)

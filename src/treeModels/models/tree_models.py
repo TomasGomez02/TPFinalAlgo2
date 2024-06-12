@@ -195,7 +195,7 @@ class DecisionTreeClassifier(Model):
         return self.tree.get_n_leaves()
         
     def get_params(self) -> dict:
-        params = self.__dict__
+        params = self.__dict__.copy()
         if "tree" in params.keys():
             params.pop("tree")
         return params
@@ -207,7 +207,7 @@ class RandomForestClassifier(Model):
     min_samples_split: Optional[int | float] = 2
     min_samples_leaf: Optional[int | float] = 1
     min_impurity_decrease: Optional[float] = 0.0
-    algorithm: Literal['ID3', 'C4.5'] = 'ID3'
+    algorithm: DecisionAlgorithm = DecisionAlgorithm.ID3
     bootstrap: bool = True
     max_features: Literal['sqrt', 'log2', None] = 'sqrt'
     max_samples: int | float | None = None
