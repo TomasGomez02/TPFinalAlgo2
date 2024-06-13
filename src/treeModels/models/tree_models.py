@@ -304,7 +304,7 @@ class RandomForestClassifier(Model):
         else:
             res = []
             for row in X:
-                res.append(self.predict(row))
+                res.append(self.predict_proba(row))
             return np.array(res)
     
     def set_params(self, **params) -> "RandomForestClassifier":

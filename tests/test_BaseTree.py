@@ -1,5 +1,4 @@
 import pytest
-from treeModels.base_tree import NumericDecision, BaseDecision
 from treeModels import DecisionTreeClassifier
 
 def test_tree(X, Y):
