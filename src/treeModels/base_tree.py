@@ -285,6 +285,9 @@ class BaseTree:
             leaves += self.forest[key].get_n_leaves()
         return leaves
     
+    def n_samples(self) -> int:
+        return self.samples.shape[0]
+    
     def __str__(self):
         """
         Returns a string representation of the tree.
