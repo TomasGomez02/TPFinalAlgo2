@@ -37,7 +37,7 @@ class DecisionTreeClassifier(Model):
         self.labels = list(range(X.shape[1]))
         if isinstance(X, DataFrame):
             self.labels = list([col for col in X.columns])
-        self.tree = BaseTree(np.array(X), np.array(Y), np.unique(Y))
+        self.tree = BaseTree(np.array(X, dtype=object), np.array(Y), np.unique(Y))
         self.algorithm(self.tree, self.get_params(), self.labels)
         return self
     
@@ -63,7 +63,7 @@ class DecisionTreeClassifier(Model):
         '''    
         if not hasattr(self, "tree"):
             raise ValueError('You must call fit() method first.')
-        X = np.array(X)
+        X = np.array(X, dtype=object)
         if len(X.shape) == 1:
             return np.array(self.tree.walkthrough(X))
         else:
@@ -95,7 +95,7 @@ class DecisionTreeClassifier(Model):
         '''    
         if not hasattr(self, "tree"):
             raise ValueError('You must call fit() method first.')
-        X = np.array(X)
+        X = np.array(X, dtype=object)
         if len(X.shape) == 1:
             return np.array(self.tree.walkthrough_proba(X))
         else:
@@ -272,9 +272,13 @@ class RandomForestClassifier(Model):
         return np.array([X[:,i] if i in features else np.array(['' for index in range(X.shape[0])]) for i in range(X.shape[1])]).T
             
     def fit(self, X: MatrixLike, Y: ArrayLike) -> "RandomForestClassifier":
+        self.labels = list(range(X.shape[1]))
+        if isinstance(X, DataFrame):
+            self.labels = [col for col in X.columns]
+            
         self._plant_forest()
         
-        X_array = np.array(X)
+        X_array = np.array(X, dtype=object)
         Y_array = np.array(Y)
         
         random_generator = np.random.RandomState(seed=self.random_state) if self.random_state is not None else None
@@ -290,13 +294,14 @@ class RandomForestClassifier(Model):
             X_random_sample = self._select_features(X_random_sample, features)
 
             self.forest[i].fit(X_random_sample, Y_random_sample)
+            self.forest[i].set_labels(self.labels)
         
         return self
     
     def predict(self, X: MatrixLike) -> ndarray:
         if not hasattr(self, "forest"):
             raise ValueError('You must call fit() method first.')
-        X = np.array(X)
+        X = np.array(X, dtype=object)
         if len(X.shape) == 1:
             predictions = [tree.predict(X).item() for tree in self.forest]
             counter = Counter(predictions)
@@ -310,7 +315,7 @@ class RandomForestClassifier(Model):
     def predict_proba(self, X: MatrixLike) -> ndarray:
         if not hasattr(self, "forest"):
             raise ValueError('You must call fit() method first.')
-        X = np.array(X)
+        X = np.array(X, dtype=object)
         if len(X.shape) == 1:
             predictions = [tree.predict_proba(X) for tree in self.forest]
             return np.mean(np.array(predictions), axis=0)

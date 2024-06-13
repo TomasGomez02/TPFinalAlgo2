@@ -213,7 +213,7 @@ class BaseTree:
         prediction : Any
             The predicted class for the given input.
         """
-        if self.is_leaf() or not X[self.decision.atr_indx] in self.forest.keys():
+        if self.is_leaf() or (not X[self.decision.atr_indx] in self.forest.keys() and not isinstance(self.decision, NumericDecision)):
             return self.get_class()
         return self.forest[self.decision.make_choice(X)].walkthrough(X)
     

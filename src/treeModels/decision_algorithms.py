@@ -85,7 +85,7 @@ def id3(current_node: BaseTree, params: dict, labels: ArrayLike, current_height:
         current_node.decision = CategoricDecision(max_ig_idx, labels[max_ig_idx])
         for col_value in np.unique(current_node.samples[:, max_ig_idx]):
             filter_values = current_node.samples[:, max_ig_idx] == col_value
-			filtered_samples = current_node.samples[filter_values]
+            filtered_samples = current_node.samples[filter_values]
             filtered_target = current_node.target[filter_values]
             new_tree = BaseTree(filtered_samples, filtered_target, current_node.classes)
             current_node.insert_tree(col_value, new_tree)
@@ -107,7 +107,7 @@ def get_umbral_candidates(X: ArrayLike, Y: ArrayLike) -> list[float]:
     candidates = []
     for i in range(len(X) - 1):
         y = i + 1
-        if Y[i] != Y[y]:
+        if Y[i] != Y[y] and X[i] != X[y]:
             candidates.append((X[i] + X[y]) / 2)
     return candidates
 
@@ -149,9 +149,8 @@ def get_col_types(X: MatrixLike) -> list[ColumnTypes]:
 def create_categoric_matrix(X: MatrixLike, Y: ArrayLike, types: list[ColumnTypes]) -> tuple[MatrixLike, dict[int, float]]:
     categoric_matrix = []
     umbrals = {}
-    X_t = X.T
-    for col_i in range(X.T.shape[0]):
-        col = X[: col_i]
+    for col_i in range(X.shape[1]):
+        col = X[:, col_i]
         if types[col_i] == ColumnTypes.NUMERIC:
             umbral = get_umbral(col, Y)
             umbrals[col_i] = umbral
