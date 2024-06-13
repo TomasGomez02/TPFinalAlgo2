@@ -259,6 +259,21 @@ class RandomForestClassifier(Model):
         return np.array([X[:,i] if i in features else np.array(['' for index in range(X.shape[0])]) for i in range(X.shape[1])]).T
             
     def fit(self, X: MatrixLike, Y: ArrayLike) -> "RandomForestClassifier":
+        """
+        Fits the RandomForestClassifier to the provided data.
+
+        Parameters
+        ----------
+        X: MatrixLike
+            The input data matrix where each row represents a sample and each column represents a feature.
+        Y: ArrayLike
+            The target values corresponding to the input data.
+
+        Returns
+        -------
+        self: RandomForestClassifier
+            The fitted RandomForestClassifier instance.
+        """
         self._plant_forest()
         
         X_array = np.array(X)
@@ -281,6 +296,27 @@ class RandomForestClassifier(Model):
         return self
     
     def predict(self, X: MatrixLike) -> ndarray:
+        """
+        Predicts class labels for the input samples based on the trained RandomForestClassifier.
+        For each input sample, it collects predictions from all trees in the forest and returns the most common class 
+        (majority voting).
+
+        Parameters
+        ----------
+        X : MatrixLike
+            The input data matrix where each row represents a sample and each column represents a feature. 
+            It can also be a single sample.
+
+        Returns
+        -------
+        ndarray
+            The predicted class labels for the input data.
+        
+        Raises
+        ------
+        ValueError
+            If the `fit` method has not been called before calling `predict`.
+        """
         if not hasattr(self, "forest"):
             raise ValueError('You must call fit() method first.')
         X = np.array(X)
@@ -295,6 +331,29 @@ class RandomForestClassifier(Model):
             return np.array(res)
     
     def predict_proba(self, X: MatrixLike) -> ndarray:
+        """
+        Predicts class probabilities for the input samples.
+
+        This method uses the trained RandomForestClassifier to predict the class probabilities for the input data.
+        For each input sample, it collects the predicted probabilities from all trees in the forest and returns 
+        the average probabilities.
+
+        Parameters
+        ----------
+        X : MatrixLike
+            The input data matrix where each row represents a sample and each column represents a feature. 
+            It can also be a single sample.
+
+        Returns
+        -------
+        ndarray
+            The predicted class probabilities for the input data.
+        
+        Raises
+        ------
+        ValueError
+            If the `fit` method has not been called before calling `predict_proba`.
+        """
         if not hasattr(self, "forest"):
             raise ValueError('You must call fit() method first.')
         X = np.array(X)
@@ -308,12 +367,42 @@ class RandomForestClassifier(Model):
             return np.array(res)
     
     def set_params(self, **params) -> "RandomForestClassifier":
+        """  
+        Sets the parameters of the RandomForestClassifier.
+
+        Parameters
+        ----------
+        **params : dict
+            A dictionary of parameter names and their corresponding values to set in the classifier.
+
+        Returns
+        -------
+        self : RandomForestClassifier
+            The instance of the classifier with updated parameters.
+        """
         for key in params.keys():
             if hasattr(self, key) and key != "forest":
                 self.__setattr__(key, params[key])
         return self
     
     def score(self, X: MatrixLike, Y: ArrayLike) -> float:
+        """
+        Computes the accuracy of the RandomForestClassifier. 
+        It calculates the proportion of correctly predicted labels to the total number of samples.
+
+        Parameters
+        ----------
+        X : MatrixLike
+            The input data matrix where each row represents a sample and each column represents a feature.
+        Y : ArrayLike
+            The true target values corresponding to the input data.
+
+        Returns
+        -------
+        float
+            The accuracy score of the model, defined as the proportion of correct predictions to the total number 
+            of samples.
+        """
         Y_predict = self.predict(X)
         return np.sum(Y_predict == Y) / len(Y)
     
@@ -321,6 +410,14 @@ class RandomForestClassifier(Model):
         raise NotImplementedError
     
     def get_params(self) -> dict: 
+        """
+        Retrieves the parameters of the RandomForestClassifier as a dictionary.
+
+        Returns
+        -------
+        dict
+            A dictionary with the parameter names as keys and their corresponding values.
+        """
         params = self.__dict__.copy()
         if "forest" in params.keys():
             params.pop("forest")
