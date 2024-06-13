@@ -2,7 +2,7 @@ from treeModels._typing import MatrixLike, ArrayLike
 from scipy.sparse import spmatrix
 from numpy import ndarray
 import numpy as np
-from typing import Optional, Literal, Any
+from typing import Optional, Literal
 from dataclasses import dataclass
 from treeModels.decision_algorithms import DecisionAlgorithm
 from treeModels.base_tree import BaseTree
@@ -304,7 +304,7 @@ class RandomForestClassifier(Model):
         else:
             res = []
             for row in X:
-                res.append(self.predict(row))
+                res.append(self.predict_proba(row))
             return np.array(res)
     
     def set_params(self, **params) -> "RandomForestClassifier":
