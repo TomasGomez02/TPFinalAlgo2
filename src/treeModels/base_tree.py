@@ -278,6 +278,14 @@ class BaseTree:
         return leaf
     
     def get_n_leaves(self) -> int:
+        """
+        Computes the number of leaf nodes in the tree.
+
+        Returns
+        -------
+        n_leaves : int
+            The number of leaf nodes in the tree.
+        """
         if self.is_leaf():
             return 1
         leaves = 0
@@ -286,6 +294,14 @@ class BaseTree:
         return leaves
     
     def n_samples(self) -> int:
+        """
+        Gets the number of samples in the current node.
+
+        Returns
+        -------
+        n_samples : int
+            The number of samples in the current node.
+        """
         return self.samples.shape[0]
     
     def __str__(self):
