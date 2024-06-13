@@ -12,8 +12,11 @@ class BaseDecision(ABC):
     atr_indx : int
         Index of the attribute based on which the decision is made.
     """
-    def __init__(self, atr_indx: int):
+    def __init__(self, atr_indx: int, atr_label: str):
         self.atr_indx = atr_indx
+        if not isinstance(atr_label, str):
+            atr_label = str(atr_label)
+        self.atr_label = atr_label
     
     @abstractmethod
     def make_choice(self, X: ArrayLike) -> str:
@@ -55,8 +58,8 @@ class NumericDecision(BaseDecision):
     value : float or int
         Threshold value for making the decision.
     """
-    def __init__(self, atr_indx, value: float | int):
-        super().__init__(atr_indx)
+    def __init__(self, atr_indx, value: float | int, atr_label: str):
+        super().__init__(atr_indx, atr_label)
         self.value = value
         self.values = [f'<={value}', f'>{value}']
     
@@ -87,7 +90,7 @@ class NumericDecision(BaseDecision):
         decision_copy : NumericDecision
             A copy of the current NumericDecision instance.
         """
-        new = NumericDecision(self.atr_indx, self.value)
+        new = NumericDecision(self.atr_indx, self.value, self.atr_label)
         return new
         
 class CategoricDecision(BaseDecision):
@@ -124,7 +127,7 @@ class CategoricDecision(BaseDecision):
         decision_copy : CategoricDecision
             A copy of the current CategoricDecision instance.
         """
-        new = CategoricDecision(self.atr_indx)
+        new = CategoricDecision(self.atr_indx, self.atr_label)
         return new
         
 
@@ -320,9 +323,22 @@ class BaseTree:
             if t.is_leaf():
                 out += str(t.get_class()) + '\n'
             else:
-                out += str(t.decision.atr_indx) + '\n'
+                # out += str(t.decision.atr_indx) + '\n'
+                out += f"[{t.decision.atr_label}]" + '\n'
             for key in t.forest.keys():
                 out += mostrar(t.forest[key], nivel + 1, key)
             return out
             
         return mostrar(self, 0)
+
+    def get_label(self) -> str:
+        return self.decision.atr_label
+    
+    def set_labels(self, labels: list):
+        if not self.is_leaf():
+            self.decision.atr_label = labels[self.decision.atr_indx]
+            for key in self.forest.keys():
+                self.forest[key].set_labels(labels)
+    
+    def get_classes(self) -> ArrayLike:
+        return self.classes.copy()

@@ -8,6 +8,7 @@ from treeModels.decision_algorithms import DecisionAlgorithm
 from treeModels.base_tree import BaseTree
 from collections import Counter
 from treeModels.models.model import Model
+from pandas import DataFrame
 
 @dataclass(repr=False, eq=False)
 class DecisionTreeClassifier(Model):
@@ -33,8 +34,11 @@ class DecisionTreeClassifier(Model):
         self: DecisionTreeClassifier
             The fitted decision tree classifier instance.
         '''    
+        self.labels = list(range(X.shape[1]))
+        if isinstance(X, DataFrame):
+            self.labels = list([col for col in X.columns])
         self.tree = BaseTree(np.array(X), np.array(Y), np.unique(Y))
-        self.algorithm(self.tree, self.get_params())
+        self.algorithm(self.tree, self.get_params(), self.labels)
         return self
     
     def predict(self, X: MatrixLike) -> ndarray:
@@ -199,6 +203,15 @@ class DecisionTreeClassifier(Model):
         if "tree" in params.keys():
             params.pop("tree")
         return params
+    
+    def set_labels(self, labels: list):
+        self.tree.set_labels(labels)
+    
+    def get_lables(self):
+        return self.labels.copy()
+    
+    def get_classes(self) -> ArrayLike:
+        return self.tree.get_classes()
 
 @dataclass(repr=False, eq=False)
 class RandomForestClassifier(Model):
