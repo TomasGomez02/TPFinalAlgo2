@@ -78,6 +78,22 @@ def max_information_gain(X: MatrixLike, Y: ArrayLike) -> tuple[int, float]:
     return max
 
 def id3(current_node: BaseTree, params: dict, current_height: int = 1):
+        """
+        Implements the ID3 algorithm to construct a decision tree.
+
+        Parameters
+        ----------
+        current_node : BaseTree
+            The current node of the tree where the decision is being made.
+        params : dict
+            Parameters for the ID3 algorithm, including:
+            - 'max_depth': int, maximum depth of the tree.
+            - 'min_samples_split': int, minimum number of samples required to split a node.
+            - 'min_samples_leaf': int, minimum number of samples required to be at a leaf node.
+            - 'min_impurity_decrease': float, minimum impurity decrease required to split a node.
+        current_height : int, optional
+            The current height of the tree (default is 1).
+        """
         max_ig_idx, info_gain = max_information_gain(current_node.samples, current_node.target)
         least_common_amount = Counter(current_node.samples[:, max_ig_idx]).most_common()[-1][1]
         if params['max_depth'] <= current_height or params['min_samples_split'] > len(current_node.samples) or params['min_samples_leaf'] > least_common_amount or params['min_impurity_decrease'] > info_gain or info_gain == 0.0:
