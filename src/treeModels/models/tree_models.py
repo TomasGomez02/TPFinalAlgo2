@@ -32,7 +32,7 @@ class DecisionTreeClassifier(Model):
         -------
         self: DecisionTreeClassifier
             The fitted decision tree classifier instance.
-        '''    
+        '''
         self.tree = BaseTree(np.array(X), np.array(Y), np.unique(Y))
         self.algorithm(self.tree, self.get_params())
         return self

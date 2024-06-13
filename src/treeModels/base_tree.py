@@ -126,7 +126,6 @@ class CategoricDecision(BaseDecision):
         """
         new = CategoricDecision(self.atr_indx)
         return new
-        
 
 class BaseTree:
     def __init__(self, samples: MatrixLike, target: ArrayLike, classes: ArrayLike):
