@@ -2,7 +2,7 @@ from treeModels._typing import MatrixLike, ArrayLike
 from scipy.sparse import spmatrix
 from numpy import ndarray
 import numpy as np
-from typing import Optional, Literal, Any
+from typing import Optional, Literal
 from dataclasses import dataclass
 from treeModels.decision_algorithms import DecisionAlgorithm
 from treeModels.base_tree import BaseTree

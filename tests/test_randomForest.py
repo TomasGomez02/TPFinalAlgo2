@@ -12,4 +12,16 @@ def test_overfitted():
     assert Counter(model.predict(X.iloc[0:3])) == {"No":2, "Yes":1}
     with pytest.raises(NotImplementedError):
         assert model.decision_path(X.iloc[0])
-    assert model.set_params(random_state=8).get_params()
+    assert model.set_params(random_state=200).get_params()["random_state"] == 200
+    assert round(model.score(X, Y), 2) == 0.74
+    assert round(model.predict_proba(X.iloc[0,:]).max(), 2) == 0.72
+
+def test_exceptions():
+    df = pd.read_csv("play_tennis.csv")
+    X = df.drop("play", axis=1)
+    Y = df["play"]
+    model = RandomForestClassifier(random_state=8)
+    with pytest.raises(ValueError):
+        model.predict(X)
+    with pytest.raises(ValueError):
+        model.predict_proba(X)
