@@ -193,8 +193,7 @@ def c45(current_node: BaseTree, params: dict, labels: ArrayLike, current_height:
             new_tree = BaseTree(filtered_samples, filtered_target, current_node.classes)
             current_node.insert_tree(col_value, new_tree)
             c45(new_tree, params, labels,  current_height + 1)
-    
-            
+      
 class DecisionAlgorithm(Enum):
     ID3 = partial(id3)
     C45 = partial(c45)
