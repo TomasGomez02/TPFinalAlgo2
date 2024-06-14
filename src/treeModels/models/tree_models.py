@@ -207,7 +207,7 @@ class DecisionTreeClassifier(Model):
     def set_labels(self, labels: list):
         self.tree.set_labels(labels)
     
-    def get_lables(self):
+    def get_labels(self):
         return self.labels.copy()
     
     def get_classes(self) -> ArrayLike:
