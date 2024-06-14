@@ -1,5 +1,6 @@
 from treeModels.base_tree import *
 from treeModels import *
+from treeModels.decision_algorithms import *
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
@@ -21,12 +22,12 @@ class PlotTree:
     def draw_arrow(self, canvas, x1, y1, x2, y2, text):
         arrow_y_offset = 35 
         canvas.create_line(x1, y1 + arrow_y_offset, x2, y2 - arrow_y_offset, arrow=tk.LAST, fill='black')
-        canvas.create_text((x1 + x2) / 2, ((y1 + arrow_y_offset) + (y2 - arrow_y_offset)) / 2, text=text, fill='black', font=('Arial', 10, 'bold'))
+        canvas.create_text((x1 + x2) / 2, ((y1 + arrow_y_offset-20) + (y2 - arrow_y_offset)) / 2, text=text, fill='black', font=('Arial', 10, 'bold'))
 
     def plot(self, canvas, x, y, dx):
         text = f'' if self.tree.is_leaf() else f'{self.tree.get_label()}\n'
         text += f'samples: {self.tree.n_samples()}\n'
-        text += f'class proportion: {self.tree.get_class_proportion()}\n'
+        text += f'impurity: {abs(round(self.tree.get_impurity(), 3))}\n'
         text += f'class: {self.tree.get_class()}'
 
         self.draw_node(canvas, x, y, text)
@@ -64,15 +65,14 @@ class PlotTree:
 
 def main():
 
-    df = pd.read_csv('/Users/santiagodarnes/Documents/UNSAM/Algoritmos2/Sin título/TPFinalAlgo2/play_tennis.csv')
-    df[df['outlook'] == 'Overcast']
+    df = pd.read_csv('/Users/santiagodarnes/Documents/UNSAM/Algoritmos2/Sin título/TPFinalAlgo2/CarEval.csv')
 
-    X = df.drop("play", axis=1)
-    Y = df['play']
+    X = df.drop("class values", axis=1)
+    Y = df['class values']
 
     X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2)
 
-    model = DecisionTreeClassifier()
+    model = DecisionTreeClassifier(max_depth=3, algorithm=DecisionAlgorithm.C45)
     model.fit(X_train, Y_train)
 
     PlotTree(model.tree).show()
