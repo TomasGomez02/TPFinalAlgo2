@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from typing import Optional, Any
 from collections import Counter
 
+
 class BaseDecision(ABC):
     """
     Abstract base class for decision-making based on a specific attribute index.
@@ -341,3 +342,7 @@ class BaseTree:
     
     def get_classes(self) -> ArrayLike:
         return self.classes.copy()
+    
+    def get_impurity(self) -> float:
+        from treeModels.decision_algorithms import entropy
+        return entropy(self.target)
