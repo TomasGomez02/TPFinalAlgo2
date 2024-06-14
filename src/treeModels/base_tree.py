@@ -319,7 +319,7 @@ class BaseTree:
         def mostrar(t: BaseTree, nivel: int, value_name = ''):
             tab = '.' * 4
             indent = tab * nivel
-            out = indent + value_name + ' | '
+            out = indent + str(value_name) + ' | '
             if t.is_leaf():
                 out += str(t.get_class()) + '\n'
             else:

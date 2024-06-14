@@ -16,7 +16,7 @@ class DecisionTreeClassifier(Model):
     min_samples_split: Optional[int | float] = 2
     min_samples_leaf: Optional[int | float] = 1
     min_impurity_decrease: Optional[float] = 0.0
-    algorithm: DecisionAlgorithm = DecisionAlgorithm.ID3
+    algorithm: DecisionAlgorithm = DecisionAlgorithm.C45
         
     def fit(self, X: MatrixLike, Y: ArrayLike) -> "DecisionTreeClassifier":
         '''
@@ -220,7 +220,7 @@ class RandomForestClassifier(Model):
     min_samples_split: Optional[int | float] = 2
     min_samples_leaf: Optional[int | float] = 1
     min_impurity_decrease: Optional[float] = 0.0
-    algorithm: DecisionAlgorithm = DecisionAlgorithm.ID3
+    algorithm: DecisionAlgorithm = DecisionAlgorithm.C45
     bootstrap: bool = True
     max_features: Literal['sqrt', 'log2', None] = 'sqrt'
     max_samples: int | float | None = None
