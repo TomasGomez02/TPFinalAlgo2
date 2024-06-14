@@ -7,7 +7,7 @@ import tkinter as tk
 import random
 
 class PlotTree:
-    def __init__(self, tree: BaseTree):
+    def __init__(self, tree):
         self.tree = tree
 
     def draw_node(self, canvas, x, y, text):
@@ -15,35 +15,38 @@ class PlotTree:
         node_width = 200
         node_height = 70
         fill_color = random.choice(colors)  # Choose a random color
-        canvas.create_rectangle(x - node_width/2, y - node_height/2, x + node_width/2, y + node_height/2, fill=fill_color, outline='black')
+        canvas.create_rectangle(x - node_width / 2, y - node_height / 2, x + node_width / 2, y + node_height / 2, fill=fill_color, outline='black')
         canvas.create_text(x, y, text=text, fill='black', justify='center')
 
     def draw_arrow(self, canvas, x1, y1, x2, y2, text):
-        canvas.create_line(x1, y1, x2, y2, arrow=tk.LAST, fill='black')
-        canvas.create_text((x1 + x2) / 2, (y1 + y2) / 2, text=text, fill='black')
+        arrow_y_offset = 35  # Offset for the arrow to be drawn below the node
+        canvas.create_line(x1, y1 + arrow_y_offset, x2, y2 - arrow_y_offset, arrow=tk.LAST, fill='black')
+        canvas.create_text((x1 + x2) / 2, ((y1 + arrow_y_offset) + (y2 - arrow_y_offset)) / 2, text=text, fill='black', font=('Arial', 10, 'bold'))
 
     def plot(self, canvas, x, y, dx):
-        text = f'decision: {self.tree.get_label() if not self.tree.is_leaf() else "Leaf"}\n'
+        text = f'' if self.tree.is_leaf() else f'{self.tree.get_label()}\n'
         text += f'samples: {self.tree.n_samples()}\n'
         text += f'class proportion: {self.tree.get_class_proportion()}\n'
         text += f'class: {self.tree.get_class()}'
 
-        if not self.tree.is_leaf():
-            for i, key in enumerate(self.tree.forest.keys()):
-                new_x = x + (i - len(self.tree.forest) / 2) * (dx + 50)  # Increase distance between nodes
-                new_y = y + 100
-                self.draw_arrow(canvas, x, y, new_x, new_y, f'value: {key}')
-                PlotTree(self.tree.forest[key]).plot(canvas, new_x, new_y, dx / 2)
-
         self.draw_node(canvas, x, y, text)
 
+        if not self.tree.is_leaf():
+            num_children = len(self.tree.forest)
+            child_dx = dx / max(num_children, 1)  # Adjust horizontal spacing based on number of children
+
+            for i, key in enumerate(self.tree.forest.keys()):
+                new_x = x + (i - (num_children - 1) / 2) * (child_dx + 250)  # Increase distance between nodes
+                new_y = y + 150  # Increase vertical distance
+                self.draw_arrow(canvas, x, y, new_x, new_y, f'{key}')
+                PlotTree(self.tree.forest[key]).plot(canvas, new_x, new_y, child_dx / 2)
 
     def show(self):
         root = tk.Tk()
-        root.geometry("1200x700")
+        root.geometry("1600x1200")  # Increase the window size for better visualization
 
         canvas = tk.Canvas(root, bg='white')  # Set background color to white
-        canvas.pack(side="left", fill="both", expand=True)
+        canvas.pack(side="top", fill="both", expand=True)
 
         scrollbar_x = tk.Scrollbar(root, orient="horizontal", command=canvas.xview)
         scrollbar_x.pack(side="bottom", fill="x")
@@ -54,7 +57,7 @@ class PlotTree:
         canvas.configure(yscrollcommand=scrollbar_y.set, xscrollcommand=scrollbar_x.set)
         canvas.bind('<Configure>', lambda e: canvas.configure(scrollregion=canvas.bbox("all")))
 
-        self.plot(canvas, 400, 50, 300)
+        self.plot(canvas, 800, 50, 1200)  # Start plotting with more initial horizontal space
 
         root.mainloop()
 
