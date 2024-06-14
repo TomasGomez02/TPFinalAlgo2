@@ -1,7 +1,7 @@
 import numpy as np
 from treeModels._typing import *
 from enum import Enum
-from treeModels.base_tree import BaseTree, CategoricDecision, NumericDecision
+from treeModels.base_tree import DecisionTree, CategoricDecision, NumericDecision
 from collections import Counter
 from functools import partial
 
@@ -76,7 +76,7 @@ def max_information_gain(X: MatrixLike, Y: ArrayLike) -> tuple[int, float]:
     
     return maxim
 
-def id3(current_node: BaseTree, params: dict, labels: ArrayLike, current_height: int = 1):
+def id3(current_node: DecisionTree, params: dict, labels: ArrayLike, current_height: int = 1):
     max_ig_idx, info_gain = max_information_gain(current_node.samples, current_node.target)
     least_common_amount = Counter(current_node.samples[:, max_ig_idx]).most_common()[-1][1]
     if params['max_depth'] <= current_height or params['min_samples_split'] > len(current_node.samples) or params['min_samples_leaf'] > least_common_amount or params['min_impurity_decrease'] > info_gain or info_gain == 0.0:
@@ -87,7 +87,7 @@ def id3(current_node: BaseTree, params: dict, labels: ArrayLike, current_height:
         filter_values = current_node.samples[:, max_ig_idx] == col_value
         filtered_samples = current_node.samples[filter_values]
         filtered_target = current_node.target[filter_values]
-        new_tree = BaseTree(filtered_samples, filtered_target, current_node.classes)
+        new_tree = DecisionTree(filtered_samples, filtered_target, current_node.classes)
         current_node.insert_tree(col_value, new_tree)
         id3(new_tree, params, labels, current_height + 1)
             
@@ -160,7 +160,7 @@ def create_categoric_matrix(X: MatrixLike, Y: ArrayLike, types: list[ColumnTypes
             categoric_matrix.append(col)
     return np.array(categoric_matrix).T, umbrals
 
-def c45(current_node: BaseTree, params: dict, labels: ArrayLike, current_height: int = 1):
+def c45(current_node: DecisionTree, params: dict, labels: ArrayLike, current_height: int = 1):
     types = get_col_types(current_node.samples)
     categoric_matrix, umbrals = create_categoric_matrix(current_node.samples, current_node.target, types)
     max_rg_idx, _gain_ratio = max_gain_ratio(categoric_matrix, current_node.target)
@@ -175,14 +175,14 @@ def c45(current_node: BaseTree, params: dict, labels: ArrayLike, current_height:
         filter_index = current_node.samples[:, max_rg_idx] <= umbral
         filtered_samples = current_node.samples[filter_index]
         filtered_target = current_node.target[filter_index]
-        smaller_tree = BaseTree(filtered_samples, filtered_target, current_node.classes)
+        smaller_tree = DecisionTree(filtered_samples, filtered_target, current_node.classes)
         current_node.insert_tree(current_node.decision.values[0], smaller_tree)
         c45(smaller_tree, params, labels, current_height + 1)
         
         filter_index = current_node.samples[:, max_rg_idx] > umbral
         filtered_samples = current_node.samples[filter_index]
         filtered_target = current_node.target[filter_index]
-        larger_tree = BaseTree(filtered_samples, filtered_target, current_node.classes)
+        larger_tree = DecisionTree(filtered_samples, filtered_target, current_node.classes)
         current_node.insert_tree(current_node.decision.values[1], larger_tree)
         c45(larger_tree, params, labels, current_height + 1)
     else:
@@ -191,7 +191,7 @@ def c45(current_node: BaseTree, params: dict, labels: ArrayLike, current_height:
             filter_values = current_node.samples[:, max_rg_idx] == col_value
             filtered_samples = current_node.samples[filter_values]
             filtered_target = current_node.target[filter_values]
-            new_tree = BaseTree(filtered_samples, filtered_target, current_node.classes)
+            new_tree = DecisionTree(filtered_samples, filtered_target, current_node.classes)
             current_node.insert_tree(col_value, new_tree)
             c45(new_tree, params, labels,  current_height + 1)
       

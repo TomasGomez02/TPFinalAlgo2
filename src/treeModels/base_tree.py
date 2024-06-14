@@ -131,7 +131,7 @@ class CategoricDecision(BaseDecision):
         new = CategoricDecision(self.atr_indx, self.atr_label)
         return new
 
-class BaseTree:
+class DecisionTree:
     def __init__(self, samples: MatrixLike, target: ArrayLike, classes: ArrayLike):
         """
         A tree structure for making decisions based on the given samples and target values.
@@ -148,7 +148,7 @@ class BaseTree:
         self.samples = samples
         self.target = target
         self.classes = classes
-        self.forest: dict[str, BaseTree] = dict()
+        self.forest: dict[str, DecisionTree] = dict()
         
     def is_leaf(self):
         """
@@ -175,7 +175,7 @@ class BaseTree:
         else:
             return 1 + max([self.forest[key].height() for key in self.forest.keys()])
         
-    def insert_tree(self, value: str, tree: "BaseTree"):
+    def insert_tree(self, value: str, tree: "DecisionTree"):
         """
         Inserts a subtree into the current tree.
 
@@ -250,7 +250,7 @@ class BaseTree:
             count[y] += 1
         return np.array(list(count.values())) / len(self.target)
     
-    def copy(self) -> "BaseTree":
+    def copy(self) -> "DecisionTree":
         """
         Creates a copy of the current tree.
 
@@ -259,13 +259,13 @@ class BaseTree:
         tree_copy : BaseTree
             A copy of the current tree.
         """
-        new = BaseTree(self.samples, self.target, self.classes)
+        new = DecisionTree(self.samples, self.target, self.classes)
         if not self.is_leaf():
             new.forest = self.forest.copy()
             new.decision = self.decision.copy()
         return new
     
-    def to_leaf(self) -> "BaseTree":
+    def to_leaf(self) -> "DecisionTree":
         """
         Converts the current tree to a leaf node.
 
@@ -316,7 +316,7 @@ class BaseTree:
         tree_str : str
             A string representation of the tree.
         """
-        def mostrar(t: BaseTree, nivel: int, value_name = ''):
+        def mostrar(t: DecisionTree, nivel: int, value_name = ''):
             tab = '.' * 4
             indent = tab * nivel
             out = indent + str(value_name) + ' | '

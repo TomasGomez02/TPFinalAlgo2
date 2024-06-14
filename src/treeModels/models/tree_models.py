@@ -5,7 +5,7 @@ import numpy as np
 from typing import Optional, Literal
 from dataclasses import dataclass
 from treeModels.decision_algorithms import DecisionAlgorithm
-from treeModels.base_tree import BaseTree
+from treeModels.base_tree import DecisionTree
 from collections import Counter
 from treeModels.models.model import Model
 from pandas import DataFrame
@@ -37,7 +37,7 @@ class DecisionTreeClassifier(Model):
         self.labels = list(range(X.shape[1]))
         if isinstance(X, DataFrame):
             self.labels = list([col for col in X.columns])
-        self.tree = BaseTree(np.array(X, dtype=object), np.array(Y), np.unique(Y))
+        self.tree = DecisionTree(np.array(X, dtype=object), np.array(Y), np.unique(Y))
         self.algorithm(self.tree, self.get_params(), self.labels)
         return self
     
@@ -157,7 +157,7 @@ class DecisionTreeClassifier(Model):
         self: DecisionTreeClassifier
             The instance of the classifier with the pruned decision tree.
         '''
-        def inner_prune(current: BaseTree, prev: BaseTree) -> None:
+        def inner_prune(current: DecisionTree, prev: DecisionTree) -> None:
             has_leaf = False
             for k, sub in current.forest.items():
                 if sub.is_leaf() and not has_leaf:
