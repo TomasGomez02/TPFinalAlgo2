@@ -2,12 +2,13 @@ from treeModels._typing import MatrixLike, ArrayLike
 from scipy.sparse import spmatrix
 from numpy import ndarray
 import numpy as np
-from typing import Optional, Literal, Any
+from typing import Optional, Literal
 from dataclasses import dataclass
 from treeModels.decision_algorithms import DecisionAlgorithm
 from treeModels.base_tree import BaseTree
 from collections import Counter
 from treeModels.models.model import Model
+from pandas import DataFrame
 
 @dataclass(repr=False, eq=False)
 class DecisionTreeClassifier(Model):
@@ -15,7 +16,7 @@ class DecisionTreeClassifier(Model):
     min_samples_split: Optional[int | float] = 2
     min_samples_leaf: Optional[int | float] = 1
     min_impurity_decrease: Optional[float] = 0.0
-    algorithm: DecisionAlgorithm = DecisionAlgorithm.ID3
+    algorithm: DecisionAlgorithm = DecisionAlgorithm.C45
         
     def fit(self, X: MatrixLike, Y: ArrayLike) -> "DecisionTreeClassifier":
         '''
@@ -33,8 +34,11 @@ class DecisionTreeClassifier(Model):
         self: DecisionTreeClassifier
             The fitted decision tree classifier instance.
         '''    
-        self.tree = BaseTree(np.array(X), np.array(Y), np.unique(Y))
-        self.algorithm(self.tree, self.get_params())
+        self.labels = list(range(X.shape[1]))
+        if isinstance(X, DataFrame):
+            self.labels = list([col for col in X.columns])
+        self.tree = BaseTree(np.array(X, dtype=object), np.array(Y), np.unique(Y))
+        self.algorithm(self.tree, self.get_params(), self.labels)
         return self
     
     def predict(self, X: MatrixLike) -> ndarray:
@@ -59,7 +63,7 @@ class DecisionTreeClassifier(Model):
         '''    
         if not hasattr(self, "tree"):
             raise ValueError('You must call fit() method first.')
-        X = np.array(X)
+        X = np.array(X, dtype=object)
         if len(X.shape) == 1:
             return np.array(self.tree.walkthrough(X))
         else:
@@ -91,7 +95,7 @@ class DecisionTreeClassifier(Model):
         '''    
         if not hasattr(self, "tree"):
             raise ValueError('You must call fit() method first.')
-        X = np.array(X)
+        X = np.array(X, dtype=object)
         if len(X.shape) == 1:
             return np.array(self.tree.walkthrough_proba(X))
         else:
@@ -199,6 +203,15 @@ class DecisionTreeClassifier(Model):
         if "tree" in params.keys():
             params.pop("tree")
         return params
+    
+    def set_labels(self, labels: list):
+        self.tree.set_labels(labels)
+    
+    def get_labels(self):
+        return self.labels.copy()
+    
+    def get_classes(self) -> ArrayLike:
+        return self.tree.get_classes()
 
 @dataclass(repr=False, eq=False)
 class RandomForestClassifier(Model):
@@ -207,7 +220,7 @@ class RandomForestClassifier(Model):
     min_samples_split: Optional[int | float] = 2
     min_samples_leaf: Optional[int | float] = 1
     min_impurity_decrease: Optional[float] = 0.0
-    algorithm: DecisionAlgorithm = DecisionAlgorithm.ID3
+    algorithm: DecisionAlgorithm = DecisionAlgorithm.C45
     bootstrap: bool = True
     max_features: Literal['sqrt', 'log2', None] = 'sqrt'
     max_samples: int | float | None = None
@@ -259,6 +272,10 @@ class RandomForestClassifier(Model):
         return np.array([X[:,i] if i in features else np.array(['' for index in range(X.shape[0])]) for i in range(X.shape[1])]).T
             
     def fit(self, X: MatrixLike, Y: ArrayLike) -> "RandomForestClassifier":
+        self.labels = list(range(X.shape[1]))
+        if isinstance(X, DataFrame):
+            self.labels = [col for col in X.columns]
+            
         """
         Fits the RandomForestClassifier to the provided data.
 
@@ -276,7 +293,7 @@ class RandomForestClassifier(Model):
         """
         self._plant_forest()
         
-        X_array = np.array(X)
+        X_array = np.array(X, dtype=object)
         Y_array = np.array(Y)
         
         random_generator = np.random.RandomState(seed=self.random_state) if self.random_state is not None else None
@@ -292,6 +309,7 @@ class RandomForestClassifier(Model):
             X_random_sample = self._select_features(X_random_sample, features)
 
             self.forest[i].fit(X_random_sample, Y_random_sample)
+            self.forest[i].set_labels(self.labels)
         
         return self
     
@@ -319,7 +337,7 @@ class RandomForestClassifier(Model):
         """
         if not hasattr(self, "forest"):
             raise ValueError('You must call fit() method first.')
-        X = np.array(X)
+        X = np.array(X, dtype=object)
         if len(X.shape) == 1:
             predictions = [tree.predict(X).item() for tree in self.forest]
             counter = Counter(predictions)
@@ -356,14 +374,14 @@ class RandomForestClassifier(Model):
         """
         if not hasattr(self, "forest"):
             raise ValueError('You must call fit() method first.')
-        X = np.array(X)
+        X = np.array(X, dtype=object)
         if len(X.shape) == 1:
             predictions = [tree.predict_proba(X) for tree in self.forest]
             return np.mean(np.array(predictions), axis=0)
         else:
             res = []
             for row in X:
-                res.append(self.predict(row))
+                res.append(self.predict_proba(row))
             return np.array(res)
     
     def set_params(self, **params) -> "RandomForestClassifier":
