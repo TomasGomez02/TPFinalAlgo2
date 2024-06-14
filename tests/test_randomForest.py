@@ -16,6 +16,8 @@ def test_overfitted():
     assert round(model.score(X, Y), 2) == 0.74
     assert round(model.predict_proba(X.iloc[0,:]).max(), 2) == 0.72
 
+# Agregar mas test para Random Forest con C4.5
+
 def test_exceptions():
     df = pd.read_csv("play_tennis.csv")
     X = df.drop("play", axis=1)
