@@ -3,6 +3,7 @@ from abc import ABC, abstractmethod
 from typing import Optional, Any
 from collections import Counter
 
+
 class BaseDecision(ABC):
     """
     Abstract base class for decision-making based on a specific attribute index.
@@ -129,7 +130,6 @@ class CategoricDecision(BaseDecision):
         """
         new = CategoricDecision(self.atr_indx, self.atr_label)
         return new
-        
 
 class BaseTree:
     def __init__(self, samples: MatrixLike, target: ArrayLike, classes: ArrayLike):
@@ -214,7 +214,7 @@ class BaseTree:
         prediction : Any
             The predicted class for the given input.
         """
-        if self.is_leaf() or not X[self.decision.atr_indx] in self.forest.keys():
+        if self.is_leaf() or (not X[self.decision.atr_indx] in self.forest.keys() and not isinstance(self.decision, NumericDecision)):
             return self.get_class()
         return self.forest[self.decision.make_choice(X)].walkthrough(X)
     
@@ -319,7 +319,7 @@ class BaseTree:
         def mostrar(t: BaseTree, nivel: int, value_name = ''):
             tab = '.' * 4
             indent = tab * nivel
-            out = indent + value_name + ' | '
+            out = indent + str(value_name) + ' | '
             if t.is_leaf():
                 out += str(t.get_class()) + '\n'
             else:
@@ -342,3 +342,7 @@ class BaseTree:
     
     def get_classes(self) -> ArrayLike:
         return self.classes.copy()
+    
+    def get_impurity(self) -> float:
+        from treeModels.decision_algorithms import entropy
+        return entropy(self.target)
