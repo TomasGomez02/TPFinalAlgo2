@@ -47,6 +47,7 @@ elif selected == 'Decision Tree':
         from treeModels import DecisionTreeClassifier
         from treeModels.decision_algorithms import DecisionAlgorithm
         from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+        from plot.plot_tree import PlotTree
 
         df = pd.read_csv('../star_classification.csv')
         df = df.assign(quality = [str(x) for x in df['cam_col']]).sample(1000)
@@ -61,7 +62,7 @@ elif selected == 'Decision Tree':
 
 
 
-    max_depth_1 = st.slider('Max Depth', min_value=1, max_value=10, value=3, help='The maximum depth of the tree')
+    max_depth_1 = st.slider('Max Depth', min_value=1, max_value=10, value=4, help='The maximum depth of the tree')
     min_samples_split_1 = st.slider('Min Samples Split', min_value=2, max_value=10, value=2, help='The minimum number of samples required to split an internal node')
     min_samples_leaf_1 = st.slider('Min Samples Leaf', min_value=1, max_value=10, value=1, help='The minimum number of samples required to be at a leaf node')
     min_impurity_decrease_1 = st.slider('Min Impurity Decrease', min_value=0.0, max_value=0.5, value=0.0, help='A node will be split if this split induces a decrease of the impurity greater than or equal to this value')    
@@ -90,6 +91,8 @@ elif selected == 'Decision Tree':
         st.write('Precision:', round(precision, 3))
         st.write('Recall:', round(recall, 3))
         st.write('F1:', round(f1, 3))
+        
+        PlotTree(clf.tree).show()
 
 
     st.write('---')
@@ -117,7 +120,7 @@ elif selected == 'Decision Tree':
 
 
 
-    max_depth = st.slider('Max Depth 2', min_value=1, max_value=10, value=3, help='The maximum depth of the tree')
+    max_depth = st.slider('Max Depth 2', min_value=1, max_value=10, value=4, help='The maximum depth of the tree')
     min_samples_split = st.slider('Min Samples Split 2', min_value=2, max_value=10, value=2, help='The minimum number of samples required to split an internal node')
     min_samples_leaf = st.slider('Min Samples Leaf 2', min_value=1, max_value=10, value=1, help='The minimum number of samples required to be at a leaf node')
     min_impurity_decrease = st.slider('Min Impurity Decrease 2', min_value=0.0, max_value=0.5, value=0.0, help='A node will be split if this split induces a decrease of the impurity greater than or equal to this value')    
@@ -178,9 +181,9 @@ elif selected == 'Random Forest':
         clf = RandomForestClassifier()
                                    
 
-    n_estimators_1 = st.slider('N Estimators 1', min_value=1, max_value=100, value=100, help='The number of trees in the forest')
-    max_features_1 = st.selectbox('Max Features 1', ['sqrt', 'log2', 'None'], help='The number of features to consider when looking for the best split')
-    max_depth_1 = st.slider('Max Depth 1', min_value=1, max_value=10, value=3, help='The maximum depth of the tree')
+    n_estimators_1 = st.slider('N Estimators 1', min_value=1, max_value=100, value=10, help='The number of trees in the forest')
+    max_features_1 = st.selectbox('Max Features 1', [ 'None', 'sqrt', 'log2'], help='The number of features to consider when looking for the best split')
+    max_depth_1 = st.slider('Max Depth 1', min_value=1, max_value=10, value=4, help='The maximum depth of the tree')
     min_samples_split_1 = st.slider('Min Samples Split 1', min_value=2, max_value=10, value=2, help='The minimum number of samples required to split an internal node')
     min_samples_leaf_1 = st.slider('Min Samples Leaf 1', min_value=1, max_value=10, value=1, help='The minimum number of samples required to be at a leaf node')
     min_impurity_decrease_1 = st.slider('Min Impurity Decrease 1', min_value=0.0, max_value=0.5, value=0.0, help='A node will be split if this split induces a decrease of the impurity greater than or equal to this value')
@@ -238,7 +241,7 @@ elif selected == 'Random Forest':
     
     n_estimators = st.slider('N Estimators', min_value=1, max_value=100, value=100, help='The number of trees in the forest')
     max_feature = st.selectbox('Max Features', ['sqrt', 'log2', 'None'], help='The number of features to consider when looking for the best split')
-    max_depth = st.slider('Max Depth', min_value=1, max_value=10, value=3, help='The maximum depth of the tree')
+    max_depth = st.slider('Max Depth', min_value=1, max_value=10, value=4, help='The maximum depth of the tree')
     min_samples_split = st.slider('Min Samples Split', min_value=2, max_value=10, value=2, help='The minimum number of samples required to split an internal node')
     min_samples_leaf = st.slider('Min Samples Leaf', min_value=1, max_value=10, value=1, help='The minimum number of samples required to be at a leaf node')
     min_impurity_decrease = st.slider('Min Impurity Decrease', min_value=0.0, max_value=0.5, value=0.0, help='A node will be split if this split induces a decrease of the impurity greater than or equal to this value')
