@@ -96,12 +96,13 @@ def split_info(col_values: ArrayLike, Y: ArrayLike) -> float:
     _split_info = 0
     for value in unique_values:
         Y_filtered = [y for i, y in enumerate(Y) if col_values[i] == value]
-        value_ratio = len(Y_filtered) / len(Y)
+        value_ratio = len(Y_filtered) / len(col_values)
         _split_info += value_ratio * np.log2(value_ratio)
     return -_split_info
             
 def gain_ratio(col_values: ArrayLike, Y: ArrayLike) -> float:
-    return float(information_gain(col_values, Y)) / float(split_info(col_values, Y))
+    si = split_info(col_values, Y)
+    return float(information_gain(col_values, Y)) / float(si if si != 0 else 1)
 
 def get_umbral_candidates(X: ArrayLike, Y: ArrayLike) -> list[float]:
     candidates = []
@@ -118,7 +119,7 @@ def get_umbral(X: ArrayLike, Y: ArrayLike) -> float:
     max_ig, best_umbral = 0.0, 0
     candidates = get_umbral_candidates(X, Y)
     for candidate in candidates:
-        ig = gain_ratio([0 if x <= candidate else 1 for x in X] , Y)                  #type: ignore
+        ig = information_gain([0 if x <= candidate else 1 for x in X] , Y)                  #type: ignore
         if ig > max_ig:
             max_ig, best_umbral = ig, candidate
     return best_umbral
