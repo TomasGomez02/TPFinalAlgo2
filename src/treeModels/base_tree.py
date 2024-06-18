@@ -136,14 +136,21 @@ class DecisionTree:
         """
         A tree structure for making decisions based on the given samples and target values.
 
-        Parameters
-        ----------
-        samples : MatrixLike
-            A matrix-like structure containing the samples used for training the tree.
-        target : ArrayLike
-            An array-like structure containing the target values corresponding to the samples.
-        """
- 
+    Attributes
+    ----------
+    samples : np.ndarray
+        The samples at the current node.
+    target : np.ndarray
+        The target values associated with the samples.
+    classes : np.ndarray
+        The unique classes in the target values.
+    decision : Optional[BaseDecision]
+        The decision at the current node.
+    forest : Dict[str, BaseTree]
+        The subtrees of the current node.
+    """
+    
+    def __init__(self, samples: MatrixLike, target: ArrayLike, classes: ArrayLike):
         self.decision: Optional[BaseDecision] = None
         self.samples = samples
         self.target = target
@@ -332,17 +339,50 @@ class DecisionTree:
         return mostrar(self, 0)
 
     def get_label(self) -> str:
+        """
+        Gets the attribute label of the decision at the current node.
+
+        Returns
+        -------
+        label : str
+            The attribute label of the decision.
+        """
         return self.decision.atr_label
     
     def set_labels(self, labels: list):
+        """
+        Sets the attribute labels for the decisions in the tree.
+
+        Parameters
+        ----------
+        labels : list
+            A list of attribute labels corresponding to the indices of the features 
+            used in the decisions.
+        """
         if not self.is_leaf():
             self.decision.atr_label = labels[self.decision.atr_indx]
             for key in self.forest.keys():
                 self.forest[key].set_labels(labels)
     
     def get_classes(self) -> ArrayLike:
+        """
+        Returns a copy of the classes array.
+
+        Returns
+        -------
+        classes_copy : np.ndarray
+            A copy of the array of unique classes.
+        """
         return self.classes.copy()
     
     def get_impurity(self) -> float:
+        """
+        Computes the impurity of the target values at the current node.
+
+        Returns
+        -------
+        impurity : float
+            The impurity of the target values at the current node.
+        """
         from treeModels.decision_algorithms import entropy
         return entropy(self.target)
