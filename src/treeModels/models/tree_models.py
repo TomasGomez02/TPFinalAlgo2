@@ -272,10 +272,6 @@ class RandomForestClassifier(Model):
         return np.array([X[:,i] if i in features else np.array(['' for index in range(X.shape[0])]) for i in range(X.shape[1])]).T
             
     def fit(self, X: MatrixLike, Y: ArrayLike) -> "RandomForestClassifier":
-        self.labels = list(range(X.shape[1]))
-        if isinstance(X, DataFrame):
-            self.labels = [col for col in X.columns]
-            
         """
         Fits the RandomForestClassifier to the provided data.
 
@@ -291,6 +287,9 @@ class RandomForestClassifier(Model):
         self: RandomForestClassifier
             The fitted RandomForestClassifier instance.
         """
+        self.labels = list(range(X.shape[1]))
+        if isinstance(X, DataFrame):
+            self.labels = [col for col in X.columns]
         self._plant_forest()
         
         X_array = np.array(X, dtype=object)
