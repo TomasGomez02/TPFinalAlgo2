@@ -12,6 +12,15 @@ from pandas import DataFrame
 
 @dataclass(repr=False, eq=False)
 class DecisionTreeClassifier(Model):
+    """
+    A decision tree classifier.
+
+    This class implements a decision tree for classification tasks. It allows 
+    customization of various parameters such as maximum depth, minimum samples 
+    for splitting, minimum samples for a leaf, minimum impurity decrease, and 
+    the algorithm used for decision making.
+    """
+
     max_depth: Optional[int | float] = np.inf
     min_samples_split: Optional[int | float] = 2
     min_samples_leaf: Optional[int | float] = 1
@@ -215,6 +224,13 @@ class DecisionTreeClassifier(Model):
 
 @dataclass(repr=False, eq=False)
 class RandomForestClassifier(Model):
+    """
+    A random forest classifier.
+
+    This class implements a random forest for classification tasks, which is an ensemble 
+    of decision trees. 
+    
+    """
     n_estimators: int = 100
     max_depth: Optional[int | float] = np.inf
     min_samples_split: Optional[int | float] = 2
