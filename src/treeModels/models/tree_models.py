@@ -175,8 +175,6 @@ class DecisionTreeClassifier(Model):
         inner_prune(self.tree, self.tree)
         return self
     
-    def decision_path(self, X: MatrixLike) -> spmatrix:
-        raise NotImplementedError
     
     def get_depth(self) -> int:
         '''
@@ -259,9 +257,7 @@ class RandomForestClassifier(Model):
         else:
             random_indices = random_generator.choice(indices, n_samples, True)
         
-        random_X = [X[i] for i in random_indices]
-        random_Y = [Y[i] for i in random_indices]
-        return np.array(random_X), np.array(random_Y)
+        return X[random_indices], Y[random_indices]
     
     def _generate_random_features(self, n_cols, random_generator: Optional[np.random.RandomState] = None) -> ndarray:
         if self.max_features == 'sqrt':
@@ -276,7 +272,6 @@ class RandomForestClassifier(Model):
         if n_features == n_cols:
             return np.array(indices)
         
-        np.sort(np.random.choice(indices, n_features, False))
         if random_generator is None:
             random_features = np.random.choice(indices, n_features, False)
         else:
@@ -285,7 +280,7 @@ class RandomForestClassifier(Model):
         return np.sort(random_features)
     
     def _select_features(self, X: MatrixLike, features: ArrayLike) -> MatrixLike:
-        return np.array([X[:,i] if i in features else np.array(['' for index in range(X.shape[0])]) for i in range(X.shape[1])]).T
+        return np.array([X[:,i] if i in features else np.full(X.shape[0], '') for i in range(X.shape[1])]).T
             
     def fit(self, X: MatrixLike, Y: ArrayLike) -> "RandomForestClassifier":
         """
@@ -438,9 +433,6 @@ class RandomForestClassifier(Model):
         """
         Y_predict = self.predict(X)
         return np.sum(Y_predict == Y) / len(Y)
-    
-    def decision_path(self, X: MatrixLike) -> spmatrix:
-        raise NotImplementedError
     
     def get_params(self) -> dict: 
         """

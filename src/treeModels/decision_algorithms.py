@@ -22,7 +22,7 @@ def entropy(Y: ArrayLike) -> float:
     res = 0
     unique_values = np.unique(Y)
     for value in unique_values:
-        Y_value = [y for y in Y if y == value]
+        Y_value = Y[Y == value]
         p = len(Y_value) / len(Y)
         res += p * np.log2(p)
         
@@ -48,7 +48,7 @@ def information_gain(col_values: ArrayLike, Y: ArrayLike) -> float:
     unique_values = np.unique(col_values)
     post_entropy = 0
     for value in unique_values:
-        Y_filtered = [y for i, y in enumerate(Y) if col_values[i] == value]
+        Y_filtered = Y[col_values == value]
         post_entropy += (len(Y_filtered) / len(Y)) * entropy(Y_filtered)
     return pre_entropy - post_entropy
 
@@ -133,9 +133,9 @@ def split_info(col_values: ArrayLike, Y: ArrayLike) -> float:
     unique_values = np.unique(col_values)
     _split_info = 0
     for value in unique_values:
-        Y_filtered = [y for i, y in enumerate(Y) if col_values[i] == value]
+        Y_filtered = Y[col_values == value]
         value_ratio = len(Y_filtered) / len(col_values)
-        _split_info += value_ratio * np.log2(value_ratio)
+        _split_info += (value_ratio * np.log2(value_ratio))
     return -_split_info
             
 def gain_ratio(col_values: ArrayLike, Y: ArrayLike) -> float:
@@ -154,8 +154,8 @@ def gain_ratio(col_values: ArrayLike, Y: ArrayLike) -> float:
     gain_ratio : float
         The calculated gain ratio value.
     """
-    si = split_info(col_values, Y)
-    return float(information_gain(col_values, Y)) / float(si if si != 0 else 1)
+
+    return information_gain(col_values, Y) / split_info(col_values, Y)
 
 def get_umbral_candidates(X: ArrayLike, Y: ArrayLike) -> list[float]:
     """
@@ -174,7 +174,7 @@ def get_umbral_candidates(X: ArrayLike, Y: ArrayLike) -> list[float]:
         A list of threshold candidates.
     """
     candidates = []
-    for i in range(len(X) - 1):
+    for i in range(X.shape[0] - 1):
         y = i + 1
         if Y[i] != Y[y] and X[i] != X[y]:
             candidates.append((X[i] + X[y]) / 2)
@@ -202,7 +202,7 @@ def get_umbral(X: ArrayLike, Y: ArrayLike) -> float:
     max_ig, best_umbral = 0.0, 0
     candidates = get_umbral_candidates(X, Y)
     for candidate in candidates:
-        ig = information_gain([0 if x <= candidate else 1 for x in X] , Y)                  #type: ignore
+        ig = information_gain((X <= candidate).astype(int) , Y)                  #type: ignore
         if ig > max_ig:
             max_ig, best_umbral = ig, candidate
     return best_umbral
@@ -224,7 +224,7 @@ def max_gain_ratio(X: MatrixLike, Y: ArrayLike) -> tuple[int, float]:
         A tuple containing the index of the feature with the highest gain ratio and the gain ratio value.
     """
     maxim = 0, 0.0
-    for i in range(len(X[0])):
+    for i in range(X.shape[1]):
         gr = gain_ratio(X[:, i], Y)             #type: ignore
         if gr > maxim[1]:
             maxim = i, gr
@@ -262,7 +262,7 @@ def get_col_types(X: MatrixLike) -> list[ColumnTypes]:
     types = []
     for col_i in range(X.shape[1]):
         e = X[0, col_i]
-        if isinstance(e, int) or isinstance(e, float):
+        if isinstance(e, int | float):
             types.append(ColumnTypes.NUMERIC)
         else:
             types.append(ColumnTypes.CATEGORIC)
@@ -295,7 +295,7 @@ def create_categoric_matrix(X: MatrixLike, Y: ArrayLike, types: list[ColumnTypes
         if types[col_i] == ColumnTypes.NUMERIC:
             umbral = get_umbral(col, Y)
             umbrals[col_i] = umbral
-            categoric_matrix.append([0 if x <= umbral else 1 for x in col])     #type: ignore
+            categoric_matrix.append((col <= umbral).astype(int))     #type: ignore
         else:
             categoric_matrix.append(col)
     return np.array(categoric_matrix).T, umbrals
