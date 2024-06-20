@@ -1,4 +1,5 @@
 from treeModels import DecisionTreeClassifier as TreeClassifierTM
+from treeModels.decision_algorithms import DecisionAlgorithm
 from sklearn.tree import DecisionTreeClassifier as TreeClassifierSKL
 from sklearn.preprocessing import LabelEncoder
 import pytest
@@ -14,22 +15,19 @@ def test_overfitted(X, Y):
     assert model.predict_proba(X).shape == (19, 2)
     assert round(model.predict_proba(X.iloc[2:,:]).max(), 2) == 1
     assert TreeClassifierTM().fit(X.iloc[0:1,:], Y.iloc[0:1]).score(X.iloc[0:1,:], Y.iloc[0:1]) == 1
-    with pytest.raises(NotImplementedError):
-        model.decision_path(X)
 
 def test_params(X, Y):
     assert TreeClassifierTM(max_depth=3).fit(X, Y).get_depth() == 3
     assert len(TreeClassifierTM(min_samples_split=5).fit(X, Y).tree.samples) >= 5
     params = {"max_depth":200, "min_samples_split":9, "min_samples_leaf":10,
-    "min_impurity_decrease": 1, "algorithm":"C4.5"}
+    "min_impurity_decrease": 1, "algorithm":DecisionAlgorithm.C45}
     assert TreeClassifierTM().set_params(**params).get_params() == params
 
-@pytest.mark.xfail
 def test_C4_5():
     df = pd.read_csv("CarEval.csv")
     X = df.drop("class values", axis=1)
     Y = df["class values"]
-    model = TreeClassifierTM(algorithm="C4.5").fit(X.iloc[5:,:], Y.iloc[5:])
+    model = TreeClassifierTM(algorithm=DecisionAlgorithm.C45).fit(X.iloc[5:,:], Y.iloc[5:])
     assert Counter(model.predict(X.iloc[:5,:])) == {"unacc":5}
     assert round(model.predict_proba(X.iloc[:5,:]).max(), 2) == 1
     
