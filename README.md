@@ -2,7 +2,7 @@
 - Grupo 8
 - Integrantes: Arrudi Victoria, Darnes Santiago, Gomez Tomás, Jara Gonzalo, Montti Florencia
 
-### Enunciado del Problema
+## Enunciado del Problema
 Se desea construir una librería que permita construir modelos predictivos a través de una versión simplificada del ensamble RandomForest. El objetivo es entrenar un modelo con algún conjunto de datos etiquetados (aprendizaje supervisado) de forma que luego permita predecir la variable objetivo. En principio nos enfocaremos en problemas de clasificación, pudiendo extenderla a problemas de regresión eventualmente.
 
 ## Instalación
