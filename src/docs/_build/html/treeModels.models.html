@@ -140,16 +140,16 @@
 <span id="treemodels-models-tree-models-module"></span><h2>treeModels.models.tree_models module<a class="headerlink" href="#module-treeModels.models.tree_models" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.DecisionTreeClassifier">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">treeModels.models.tree_models.</span></span><span class="sig-name descname"><span class="pre">DecisionTreeClassifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_depth:</span> <span class="pre">Union[int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NoneType]</span> <span class="pre">=</span> <span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_split:</span> <span class="pre">Union[int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NoneType]</span> <span class="pre">=</span> <span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_leaf:</span> <span class="pre">Union[int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NoneType]</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_impurity_decrease:</span> <span class="pre">Optional[float]</span> <span class="pre">=</span> <span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm:</span> <span class="pre">treeModels.decision_algorithms.DecisionAlgorithm</span> <span class="pre">=</span> <span class="pre">&lt;DecisionAlgorithm.ID3:</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">id3</span> <span class="pre">at</span> <span class="pre">0x127747a60&gt;)&gt;</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.models.tree_models.DecisionTreeClassifier" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">treeModels.models.tree_models.</span></span><span class="sig-name descname"><span class="pre">DecisionTreeClassifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_split</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_leaf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_impurity_decrease</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="treeModels.html#treeModels.decision_algorithms.DecisionAlgorithm" title="treeModels.decision_algorithms.DecisionAlgorithm"><span class="pre">DecisionAlgorithm</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">DecisionAlgorithm.C45</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.models.tree_models.DecisionTreeClassifier" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#treeModels.models.model.Model" title="treeModels.models.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a></p>
+<p>A decision tree classifier.</p>
+<p>This class implements a decision tree for classification tasks. It allows 
+customization of various parameters such as maximum depth, minimum samples 
+for splitting, minimum samples for a leaf, minimum impurity decrease, and 
+the algorithm used for decision making.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.DecisionTreeClassifier.algorithm">
-<span class="sig-name descname"><span class="pre">algorithm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="treeModels.html#treeModels.decision_algorithms.DecisionAlgorithm" title="treeModels.decision_algorithms.DecisionAlgorithm"><span class="pre">DecisionAlgorithm</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">functools.partial(&lt;function</span> <span class="pre">id3&gt;)</span></em><a class="headerlink" href="#treeModels.models.tree_models.DecisionTreeClassifier.algorithm" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="treeModels.models.tree_models.DecisionTreeClassifier.decision_path">
-<span class="sig-name descname"><span class="pre">decision_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">spmatrix</span></span></span><a class="headerlink" href="#treeModels.models.tree_models.DecisionTreeClassifier.decision_path" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">algorithm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="treeModels.html#treeModels.decision_algorithms.DecisionAlgorithm" title="treeModels.decision_algorithms.DecisionAlgorithm"><span class="pre">DecisionAlgorithm</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">functools.partial(&lt;function</span> <span class="pre">c45&gt;)</span></em><a class="headerlink" href="#treeModels.models.tree_models.DecisionTreeClassifier.algorithm" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -175,6 +175,11 @@
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="treeModels.models.tree_models.DecisionTreeClassifier.get_classes">
+<span class="sig-name descname"><span class="pre">get_classes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#treeModels.models.tree_models.DecisionTreeClassifier.get_classes" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.DecisionTreeClassifier.get_depth">
 <span class="sig-name descname"><span class="pre">get_depth</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#treeModels.models.tree_models.DecisionTreeClassifier.get_depth" title="Link to this definition"></a></dt>
 <dd><p>Returns the depth of the decision tree.</p>
@@ -186,6 +191,11 @@
 </dl>
 </section>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.models.tree_models.DecisionTreeClassifier.get_labels">
+<span class="sig-name descname"><span class="pre">get_labels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.models.tree_models.DecisionTreeClassifier.get_labels" title="Link to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.DecisionTreeClassifier.get_n_leaves">
@@ -333,6 +343,11 @@ to the total number of samples.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="treeModels.models.tree_models.DecisionTreeClassifier.set_labels">
+<span class="sig-name descname"><span class="pre">set_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.models.tree_models.DecisionTreeClassifier.set_labels" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.DecisionTreeClassifier.set_params">
 <span class="sig-name descname"><span class="pre">set_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#treeModels.models.tree_models.DecisionTreeClassifier" title="treeModels.models.tree_models.DecisionTreeClassifier"><span class="pre">DecisionTreeClassifier</span></a></span></span><a class="headerlink" href="#treeModels.models.tree_models.DecisionTreeClassifier.set_params" title="Link to this definition"></a></dt>
 <dd><p>Sets the parameters of the DecisionTreeClassifier.</p>
@@ -356,11 +371,14 @@ to the total number of samples.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.RandomForestClassifier">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">treeModels.models.tree_models.</span></span><span class="sig-name descname"><span class="pre">RandomForestClassifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_estimators:</span> <span class="pre">int</span> <span class="pre">=</span> <span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth:</span> <span class="pre">Union[int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NoneType]</span> <span class="pre">=</span> <span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_split:</span> <span class="pre">Union[int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NoneType]</span> <span class="pre">=</span> <span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_leaf:</span> <span class="pre">Union[int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">NoneType]</span> <span class="pre">=</span> <span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_impurity_decrease:</span> <span class="pre">Optional[float]</span> <span class="pre">=</span> <span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm:</span> <span class="pre">treeModels.decision_algorithms.DecisionAlgorithm</span> <span class="pre">=</span> <span class="pre">&lt;DecisionAlgorithm.ID3:</span> <span class="pre">functools.partial(&lt;function</span> <span class="pre">id3</span> <span class="pre">at</span> <span class="pre">0x127747a60&gt;)&gt;</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bootstrap:</span> <span class="pre">bool</span> <span class="pre">=</span> <span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_features:</span> <span class="pre">Literal['sqrt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">'log2'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">None]</span> <span class="pre">=</span> <span class="pre">'sqrt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_samples:</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">float</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state:</span> <span class="pre">int</span> <span class="pre">|</span> <span class="pre">None</span> <span class="pre">=</span> <span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.models.tree_models.RandomForestClassifier" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">treeModels.models.tree_models.</span></span><span class="sig-name descname"><span class="pre">RandomForestClassifier</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n_estimators</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_depth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_split</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_samples_leaf</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">min_impurity_decrease</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">algorithm</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="treeModels.html#treeModels.decision_algorithms.DecisionAlgorithm" title="treeModels.decision_algorithms.DecisionAlgorithm"><span class="pre">DecisionAlgorithm</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">DecisionAlgorithm.C45</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bootstrap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_features</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Literal</span><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'sqrt'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'log2'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">None</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'sqrt'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">max_samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">random_state</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.models.tree_models.RandomForestClassifier" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#treeModels.models.model.Model" title="treeModels.models.model.Model"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a></p>
+<p>A random forest classifier.</p>
+<p>This class implements a random forest for classification tasks, which is an ensemble 
+of decision trees.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.RandomForestClassifier.algorithm">
-<span class="sig-name descname"><span class="pre">algorithm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="treeModels.html#treeModels.decision_algorithms.DecisionAlgorithm" title="treeModels.decision_algorithms.DecisionAlgorithm"><span class="pre">DecisionAlgorithm</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">functools.partial(&lt;function</span> <span class="pre">id3&gt;)</span></em><a class="headerlink" href="#treeModels.models.tree_models.RandomForestClassifier.algorithm" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">algorithm</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="treeModels.html#treeModels.decision_algorithms.DecisionAlgorithm" title="treeModels.decision_algorithms.DecisionAlgorithm"><span class="pre">DecisionAlgorithm</span></a></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">functools.partial(&lt;function</span> <span class="pre">c45&gt;)</span></em><a class="headerlink" href="#treeModels.models.tree_models.RandomForestClassifier.algorithm" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
@@ -369,19 +387,39 @@ to the total number of samples.</p>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="treeModels.models.tree_models.RandomForestClassifier.decision_path">
-<span class="sig-name descname"><span class="pre">decision_path</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">spmatrix</span></span></span><a class="headerlink" href="#treeModels.models.tree_models.RandomForestClassifier.decision_path" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.RandomForestClassifier.fit">
 <span class="sig-name descname"><span class="pre">fit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#treeModels.models.tree_models.RandomForestClassifier" title="treeModels.models.tree_models.RandomForestClassifier"><span class="pre">RandomForestClassifier</span></a></span></span><a class="headerlink" href="#treeModels.models.tree_models.RandomForestClassifier.fit" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Fits the RandomForestClassifier to the provided data.</p>
+<section id="id17">
+<h3>Parameters<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>X: MatrixLike</dt><dd><p>The input data matrix where each row represents a sample and each column represents a feature.</p>
+</dd>
+<dt>Y: ArrayLike</dt><dd><p>The target values corresponding to the input data.</p>
+</dd>
+</dl>
+</section>
+<section id="id18">
+<h3>Returns<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>self: RandomForestClassifier</dt><dd><p>The fitted RandomForestClassifier instance.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.RandomForestClassifier.get_params">
 <span class="sig-name descname"><span class="pre">get_params</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#treeModels.models.tree_models.RandomForestClassifier.get_params" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Retrieves the parameters of the RandomForestClassifier as a dictionary.</p>
+<section id="id19">
+<h3>Returns<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>dict</dt><dd><p>A dictionary with the parameter names as keys and their corresponding values.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.RandomForestClassifier.max_depth">
@@ -421,12 +459,63 @@ to the total number of samples.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.RandomForestClassifier.predict">
 <span class="sig-name descname"><span class="pre">predict</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#treeModels.models.tree_models.RandomForestClassifier.predict" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Predicts class labels for the input samples based on the trained RandomForestClassifier.
+For each input sample, it collects predictions from all trees in the forest and returns the most common class 
+(majority voting).</p>
+<section id="id20">
+<h3>Parameters<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>X<span class="classifier">MatrixLike</span></dt><dd><p>The input data matrix where each row represents a sample and each column represents a feature. 
+It can also be a single sample.</p>
+</dd>
+</dl>
+</section>
+<section id="id21">
+<h3>Returns<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>ndarray</dt><dd><p>The predicted class labels for the input data.</p>
+</dd>
+</dl>
+</section>
+<section id="id22">
+<h3>Raises<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>ValueError</dt><dd><p>If the <cite>fit</cite> method has not been called before calling <cite>predict</cite>.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.RandomForestClassifier.predict_proba">
 <span class="sig-name descname"><span class="pre">predict_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ndarray</span></span></span><a class="headerlink" href="#treeModels.models.tree_models.RandomForestClassifier.predict_proba" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Predicts class probabilities for the input samples.</p>
+<p>This method uses the trained RandomForestClassifier to predict the class probabilities for the input data.
+For each input sample, it collects the predicted probabilities from all trees in the forest and returns 
+the average probabilities.</p>
+<section id="id23">
+<h3>Parameters<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>X<span class="classifier">MatrixLike</span></dt><dd><p>The input data matrix where each row represents a sample and each column represents a feature. 
+It can also be a single sample.</p>
+</dd>
+</dl>
+</section>
+<section id="id24">
+<h3>Returns<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>ndarray</dt><dd><p>The predicted class probabilities for the input data.</p>
+</dd>
+</dl>
+</section>
+<section id="id25">
+<h3>Raises<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>ValueError</dt><dd><p>If the <cite>fit</cite> method has not been called before calling <cite>predict_proba</cite>.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.RandomForestClassifier.random_state">
@@ -436,12 +525,46 @@ to the total number of samples.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.RandomForestClassifier.score">
 <span class="sig-name descname"><span class="pre">score</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#treeModels.models.tree_models.RandomForestClassifier.score" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Computes the accuracy of the RandomForestClassifier. 
+It calculates the proportion of correctly predicted labels to the total number of samples.</p>
+<section id="id26">
+<h3>Parameters<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>X<span class="classifier">MatrixLike</span></dt><dd><p>The input data matrix where each row represents a sample and each column represents a feature.</p>
+</dd>
+<dt>Y<span class="classifier">ArrayLike</span></dt><dd><p>The true target values corresponding to the input data.</p>
+</dd>
+</dl>
+</section>
+<section id="id27">
+<h3>Returns<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>float</dt><dd><p>The accuracy score of the model, defined as the proportion of correct predictions to the total number 
+of samples.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="treeModels.models.tree_models.RandomForestClassifier.set_params">
 <span class="sig-name descname"><span class="pre">set_params</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">params</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#treeModels.models.tree_models.RandomForestClassifier" title="treeModels.models.tree_models.RandomForestClassifier"><span class="pre">RandomForestClassifier</span></a></span></span><a class="headerlink" href="#treeModels.models.tree_models.RandomForestClassifier.set_params" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Sets the parameters of the RandomForestClassifier.</p>
+<section id="id28">
+<h3>Parameters<a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt><a href="#id29"><span class="problematic" id="id30">**</span></a>params<span class="classifier">dict</span></dt><dd><p>A dictionary of parameter names and their corresponding values to set in the classifier.</p>
+</dd>
+</dl>
+</section>
+<section id="id31">
+<h3>Returns<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>self<span class="classifier">RandomForestClassifier</span></dt><dd><p>The instance of the classifier with updated parameters.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
 
 </dd></dl>
 

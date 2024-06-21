@@ -55,18 +55,26 @@
 <li class="toctree-l3"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#module-treeModels.base_tree">treeModels.base_tree module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#treeModels.base_tree.BaseDecision"><code class="docutils literal notranslate"><span class="pre">BaseDecision</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#treeModels.base_tree.BaseTree"><code class="docutils literal notranslate"><span class="pre">BaseTree</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#treeModels.base_tree.CategoricDecision"><code class="docutils literal notranslate"><span class="pre">CategoricDecision</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#treeModels.base_tree.DecisionTree"><code class="docutils literal notranslate"><span class="pre">DecisionTree</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#treeModels.base_tree.NumericDecision"><code class="docutils literal notranslate"><span class="pre">NumericDecision</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-treeModels.decision_algorithms">treeModels.decision_algorithms module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#treeModels.decision_algorithms.ColumnTypes"><code class="docutils literal notranslate"><span class="pre">ColumnTypes</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#treeModels.decision_algorithms.DecisionAlgorithm"><code class="docutils literal notranslate"><span class="pre">DecisionAlgorithm</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#treeModels.decision_algorithms.c45"><code class="docutils literal notranslate"><span class="pre">c45()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#treeModels.decision_algorithms.create_categoric_matrix"><code class="docutils literal notranslate"><span class="pre">create_categoric_matrix()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#treeModels.decision_algorithms.entropy"><code class="docutils literal notranslate"><span class="pre">entropy()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#treeModels.decision_algorithms.gain_ratio"><code class="docutils literal notranslate"><span class="pre">gain_ratio()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#treeModels.decision_algorithms.get_col_types"><code class="docutils literal notranslate"><span class="pre">get_col_types()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#treeModels.decision_algorithms.get_umbral"><code class="docutils literal notranslate"><span class="pre">get_umbral()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#treeModels.decision_algorithms.get_umbral_candidates"><code class="docutils literal notranslate"><span class="pre">get_umbral_candidates()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#treeModels.decision_algorithms.id3"><code class="docutils literal notranslate"><span class="pre">id3()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#treeModels.decision_algorithms.information_gain"><code class="docutils literal notranslate"><span class="pre">information_gain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#treeModels.decision_algorithms.max_gain_ratio"><code class="docutils literal notranslate"><span class="pre">max_gain_ratio()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#treeModels.decision_algorithms.max_information_gain"><code class="docutils literal notranslate"><span class="pre">max_information_gain()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#treeModels.decision_algorithms.split_info"><code class="docutils literal notranslate"><span class="pre">split_info()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-treeModels">Module contents</a></li>
@@ -123,9 +131,10 @@
 <li class="toctree-l2"><a class="reference internal" href="treeModels.models.html#module-treeModels.models.tree_models">treeModels.models.tree_models module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier.algorithm"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier.algorithm</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier.decision_path"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier.decision_path()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier.fit"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier.fit()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier.get_classes"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier.get_classes()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier.get_depth"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier.get_depth()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier.get_labels"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier.get_labels()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier.get_n_leaves"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier.get_n_leaves()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier.get_params"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier.get_params()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier.max_depth"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier.max_depth</span></code></a></li>
@@ -136,13 +145,13 @@
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier.predict_proba"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier.predict_proba()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier.prune"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier.prune()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier.score"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier.score()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier.set_labels"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier.set_labels()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.DecisionTreeClassifier.set_params"><code class="docutils literal notranslate"><span class="pre">DecisionTreeClassifier.set_params()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.RandomForestClassifier"><code class="docutils literal notranslate"><span class="pre">RandomForestClassifier</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.RandomForestClassifier.algorithm"><code class="docutils literal notranslate"><span class="pre">RandomForestClassifier.algorithm</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.RandomForestClassifier.bootstrap"><code class="docutils literal notranslate"><span class="pre">RandomForestClassifier.bootstrap</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.RandomForestClassifier.decision_path"><code class="docutils literal notranslate"><span class="pre">RandomForestClassifier.decision_path()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.RandomForestClassifier.fit"><code class="docutils literal notranslate"><span class="pre">RandomForestClassifier.fit()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.RandomForestClassifier.get_params"><code class="docutils literal notranslate"><span class="pre">RandomForestClassifier.get_params()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="treeModels.models.html#treeModels.models.tree_models.RandomForestClassifier.max_depth"><code class="docutils literal notranslate"><span class="pre">RandomForestClassifier.max_depth</span></code></a></li>
@@ -175,7 +184,7 @@
 <span id="treemodels-base-tree-module"></span><h2>treeModels.base_tree module<a class="headerlink" href="#module-treeModels.base_tree" title="Link to this heading"></a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="treeModels.base_tree.BaseDecision">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">treeModels.base_tree.</span></span><span class="sig-name descname"><span class="pre">BaseDecision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atr_indx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.BaseDecision" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">treeModels.base_tree.</span></span><span class="sig-name descname"><span class="pre">BaseDecision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atr_indx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atr_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.BaseDecision" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">ABC</span></code></p>
 <p>Abstract base class for decision-making based on a specific attribute index.</p>
 <section id="parameters">
@@ -221,156 +230,12 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="treeModels.base_tree.BaseTree">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">treeModels.base_tree.</span></span><span class="sig-name descname"><span class="pre">BaseTree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.BaseTree" title="Link to this definition"></a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<dl class="py method">
-<dt class="sig sig-object py" id="treeModels.base_tree.BaseTree.copy">
-<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#treeModels.base_tree.BaseTree" title="treeModels.base_tree.BaseTree"><span class="pre">BaseTree</span></a></span></span><a class="headerlink" href="#treeModels.base_tree.BaseTree.copy" title="Link to this definition"></a></dt>
-<dd><p>Creates a copy of the current tree.</p>
-<section id="id3">
-<h3>Returns<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>tree_copy<span class="classifier">BaseTree</span></dt><dd><p>A copy of the current tree.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="treeModels.base_tree.BaseTree.get_class">
-<span class="sig-name descname"><span class="pre">get_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#treeModels.base_tree.BaseTree.get_class" title="Link to this definition"></a></dt>
-<dd><p>Gets the most common class in the target values.</p>
-<section id="id4">
-<h3>Returns<a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>most_common_class<span class="classifier">Any</span></dt><dd><p>The most common class in the target values.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="treeModels.base_tree.BaseTree.get_class_proportion">
-<span class="sig-name descname"><span class="pre">get_class_proportion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.BaseTree.get_class_proportion" title="Link to this definition"></a></dt>
-<dd><p>Gets the proportions of each class in the target values.</p>
-<section id="id5">
-<h3>Returns<a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>class_proportions<span class="classifier">np.ndarray</span></dt><dd><p>An array of class proportions.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="treeModels.base_tree.BaseTree.get_n_leaves">
-<span class="sig-name descname"><span class="pre">get_n_leaves</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#treeModels.base_tree.BaseTree.get_n_leaves" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="treeModels.base_tree.BaseTree.height">
-<span class="sig-name descname"><span class="pre">height</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.BaseTree.height" title="Link to this definition"></a></dt>
-<dd><p>Computes the height of the tree.</p>
-<section id="id6">
-<h3>Returns<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>height<span class="classifier">int</span></dt><dd><p>The height of the tree.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="treeModels.base_tree.BaseTree.insert_tree">
-<span class="sig-name descname"><span class="pre">insert_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#treeModels.base_tree.BaseTree" title="treeModels.base_tree.BaseTree"><span class="pre">BaseTree</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.BaseTree.insert_tree" title="Link to this definition"></a></dt>
-<dd><p>Inserts a subtree into the current tree.</p>
-<section id="id7">
-<h3>Parameters<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>value<span class="classifier">str</span></dt><dd><p>The value associated with the subtree.</p>
-</dd>
-<dt>tree<span class="classifier">BaseTree</span></dt><dd><p>The subtree to be inserted.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="treeModels.base_tree.BaseTree.is_leaf">
-<span class="sig-name descname"><span class="pre">is_leaf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.BaseTree.is_leaf" title="Link to this definition"></a></dt>
-<dd><p>Checks if the current node is a leaf node.</p>
-<section id="id8">
-<h3>Returns<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>is_leaf<span class="classifier">bool</span></dt><dd><p>True if the current node is a leaf, False otherwise.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="treeModels.base_tree.BaseTree.to_leaf">
-<span class="sig-name descname"><span class="pre">to_leaf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#treeModels.base_tree.BaseTree" title="treeModels.base_tree.BaseTree"><span class="pre">BaseTree</span></a></span></span><a class="headerlink" href="#treeModels.base_tree.BaseTree.to_leaf" title="Link to this definition"></a></dt>
-<dd><p>Converts the current tree to a leaf node.</p>
-<section id="id9">
-<h3>Returns<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>leaf<span class="classifier">BaseTree</span></dt><dd><p>A copy of the current tree as a leaf node.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="treeModels.base_tree.BaseTree.walkthrough">
-<span class="sig-name descname"><span class="pre">walkthrough</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.BaseTree.walkthrough" title="Link to this definition"></a></dt>
-<dd><p>Walks through the tree to make a prediction based on the given input.</p>
-<section id="id10">
-<h3>Parameters<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>X<span class="classifier">ArrayLike</span></dt><dd><p>An array-like structure containing the input data.</p>
-</dd>
-</dl>
-</section>
-<section id="id11">
-<h3>Returns<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>prediction<span class="classifier">Any</span></dt><dd><p>The predicted class for the given input.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="treeModels.base_tree.BaseTree.walkthrough_proba">
-<span class="sig-name descname"><span class="pre">walkthrough_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.BaseTree.walkthrough_proba" title="Link to this definition"></a></dt>
-<dd><p>Walks through the tree to get the class proportions based on the given input.</p>
-<section id="id12">
-<h3>Parameters<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>X<span class="classifier">ArrayLike</span></dt><dd><p>An array-like structure containing the input data.</p>
-</dd>
-</dl>
-</section>
-<section id="id13">
-<h3>Returns<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
-<dl class="simple">
-<dt>class_proportions<span class="classifier">np.ndarray</span></dt><dd><p>The class proportions for the given input.</p>
-</dd>
-</dl>
-</section>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="treeModels.base_tree.CategoricDecision">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">treeModels.base_tree.</span></span><span class="sig-name descname"><span class="pre">CategoricDecision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atr_indx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.CategoricDecision" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">treeModels.base_tree.</span></span><span class="sig-name descname"><span class="pre">CategoricDecision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atr_indx</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atr_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.CategoricDecision" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="#treeModels.base_tree.BaseDecision" title="treeModels.base_tree.BaseDecision"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDecision</span></code></a></p>
 <p>Decision-making class for categorical attributes.</p>
-<section id="id14">
-<h3>Parameters<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<section id="id3">
+<h3>Parameters<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>atr_indx<span class="classifier">int</span></dt><dd><p>Index of the attribute based on which the decision is made.</p>
 </dd>
@@ -379,8 +244,8 @@
 <dt class="sig sig-object py" id="treeModels.base_tree.CategoricDecision.copy">
 <span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#treeModels.base_tree.CategoricDecision" title="treeModels.base_tree.CategoricDecision"><span class="pre">CategoricDecision</span></a></span></span><a class="headerlink" href="#treeModels.base_tree.CategoricDecision.copy" title="Link to this definition"></a></dt>
 <dd><p>Creates a copy of the CategoricDecision instance.</p>
-<section id="id15">
-<h4>Returns<a class="headerlink" href="#id15" title="Link to this heading"></a></h4>
+<section id="id4">
+<h4>Returns<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
 <dl class="simple">
 <dt>decision_copy<span class="classifier">CategoricDecision</span></dt><dd><p>A copy of the current CategoricDecision instance.</p>
 </dd>
@@ -392,15 +257,15 @@
 <dt class="sig sig-object py" id="treeModels.base_tree.CategoricDecision.make_choice">
 <span class="sig-name descname"><span class="pre">make_choice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#treeModels.base_tree.CategoricDecision.make_choice" title="Link to this definition"></a></dt>
 <dd><p>Makes a decision based on the categorical value of the attribute at the given index.</p>
-<section id="id16">
-<h4>Parameters<a class="headerlink" href="#id16" title="Link to this heading"></a></h4>
+<section id="id5">
+<h4>Parameters<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
 <dl class="simple">
 <dt>X<span class="classifier">ArrayLike</span></dt><dd><p>Array-like structure containing the data for making the decision.</p>
 </dd>
 </dl>
 </section>
-<section id="id17">
-<h4>Returns<a class="headerlink" href="#id17" title="Link to this heading"></a></h4>
+<section id="id6">
+<h4>Returns<a class="headerlink" href="#id6" title="Link to this heading"></a></h4>
 <dl class="simple">
 <dt>choice<span class="classifier">str</span></dt><dd><p>The categorical value of the attribute at the specified index.</p>
 </dd>
@@ -412,12 +277,230 @@
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="treeModels.base_tree.NumericDecision">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">treeModels.base_tree.</span></span><span class="sig-name descname"><span class="pre">NumericDecision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atr_indx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.NumericDecision" title="Link to this definition"></a></dt>
-<dd><p>Bases: <a class="reference internal" href="#treeModels.base_tree.BaseDecision" title="treeModels.base_tree.BaseDecision"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDecision</span></code></a></p>
-<p>Decision-making class for numerical attributes based on a threshold value.</p>
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">treeModels.base_tree.</span></span><span class="sig-name descname"><span class="pre">DecisionTree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">target</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">classes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.DecisionTree" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#treeModels.base_tree.DecisionTree" title="treeModels.base_tree.DecisionTree"><span class="pre">DecisionTree</span></a></span></span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.copy" title="Link to this definition"></a></dt>
+<dd><p>Creates a copy of the current tree.</p>
+<section id="id7">
+<h3>Returns<a class="headerlink" href="#id7" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>tree_copy<span class="classifier">BaseTree</span></dt><dd><p>A copy of the current tree.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.get_class">
+<span class="sig-name descname"><span class="pre">get_class</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Any</span></span></span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.get_class" title="Link to this definition"></a></dt>
+<dd><p>Gets the most common class in the target values.</p>
+<section id="id8">
+<h3>Returns<a class="headerlink" href="#id8" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>most_common_class<span class="classifier">Any</span></dt><dd><p>The most common class in the target values.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.get_class_proportion">
+<span class="sig-name descname"><span class="pre">get_class_proportion</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.get_class_proportion" title="Link to this definition"></a></dt>
+<dd><p>Gets the proportions of each class in the target values.</p>
+<section id="id9">
+<h3>Returns<a class="headerlink" href="#id9" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>class_proportions<span class="classifier">np.ndarray</span></dt><dd><p>An array of class proportions.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.get_classes">
+<span class="sig-name descname"><span class="pre">get_classes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.get_classes" title="Link to this definition"></a></dt>
+<dd><p>Returns a copy of the classes array.</p>
+<section id="id10">
+<h3>Returns<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>classes_copy<span class="classifier">np.ndarray</span></dt><dd><p>A copy of the array of unique classes.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.get_impurity">
+<span class="sig-name descname"><span class="pre">get_impurity</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.get_impurity" title="Link to this definition"></a></dt>
+<dd><p>Computes the impurity of the target values at the current node.</p>
+<section id="id11">
+<h3>Returns<a class="headerlink" href="#id11" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>impurity<span class="classifier">float</span></dt><dd><p>The impurity of the target values at the current node.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.get_label">
+<span class="sig-name descname"><span class="pre">get_label</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.get_label" title="Link to this definition"></a></dt>
+<dd><p>Gets the attribute label of the decision at the current node.</p>
+<section id="id12">
+<h3>Returns<a class="headerlink" href="#id12" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>label<span class="classifier">str</span></dt><dd><p>The attribute label of the decision.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.get_n_leaves">
+<span class="sig-name descname"><span class="pre">get_n_leaves</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.get_n_leaves" title="Link to this definition"></a></dt>
+<dd><p>Computes the number of leaf nodes in the tree.</p>
+<section id="id13">
+<h3>Returns<a class="headerlink" href="#id13" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>n_leaves<span class="classifier">int</span></dt><dd><p>The number of leaf nodes in the tree.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.height">
+<span class="sig-name descname"><span class="pre">height</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.height" title="Link to this definition"></a></dt>
+<dd><p>Computes the height of the tree.</p>
+<section id="id14">
+<h3>Returns<a class="headerlink" href="#id14" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>height<span class="classifier">int</span></dt><dd><p>The height of the tree.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.insert_tree">
+<span class="sig-name descname"><span class="pre">insert_tree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tree</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#treeModels.base_tree.DecisionTree" title="treeModels.base_tree.DecisionTree"><span class="pre">DecisionTree</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.insert_tree" title="Link to this definition"></a></dt>
+<dd><p>Inserts a subtree into the current tree.</p>
+<section id="id15">
+<h3>Parameters<a class="headerlink" href="#id15" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>value<span class="classifier">str</span></dt><dd><p>The value associated with the subtree.</p>
+</dd>
+<dt>tree<span class="classifier">BaseTree</span></dt><dd><p>The subtree to be inserted.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.is_leaf">
+<span class="sig-name descname"><span class="pre">is_leaf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.is_leaf" title="Link to this definition"></a></dt>
+<dd><p>Checks if the current node is a leaf node.</p>
+<section id="id16">
+<h3>Returns<a class="headerlink" href="#id16" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>is_leaf<span class="classifier">bool</span></dt><dd><p>True if the current node is a leaf, False otherwise.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.n_samples">
+<span class="sig-name descname"><span class="pre">n_samples</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.n_samples" title="Link to this definition"></a></dt>
+<dd><p>Gets the number of samples in the current node.</p>
+<section id="id17">
+<h3>Returns<a class="headerlink" href="#id17" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>n_samples<span class="classifier">int</span></dt><dd><p>The number of samples in the current node.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.set_labels">
+<span class="sig-name descname"><span class="pre">set_labels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.set_labels" title="Link to this definition"></a></dt>
+<dd><p>Sets the attribute labels for the decisions in the tree.</p>
 <section id="id18">
 <h3>Parameters<a class="headerlink" href="#id18" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>labels<span class="classifier">list</span></dt><dd><p>A list of attribute labels corresponding to the indices of the features 
+used in the decisions.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.to_leaf">
+<span class="sig-name descname"><span class="pre">to_leaf</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#treeModels.base_tree.DecisionTree" title="treeModels.base_tree.DecisionTree"><span class="pre">DecisionTree</span></a></span></span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.to_leaf" title="Link to this definition"></a></dt>
+<dd><p>Converts the current tree to a leaf node.</p>
+<section id="id19">
+<h3>Returns<a class="headerlink" href="#id19" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>leaf<span class="classifier">BaseTree</span></dt><dd><p>A copy of the current tree as a leaf node.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.walkthrough">
+<span class="sig-name descname"><span class="pre">walkthrough</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.walkthrough" title="Link to this definition"></a></dt>
+<dd><p>Walks through the tree to make a prediction based on the given input.</p>
+<section id="id20">
+<h3>Parameters<a class="headerlink" href="#id20" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>X<span class="classifier">ArrayLike</span></dt><dd><p>An array-like structure containing the input data.</p>
+</dd>
+</dl>
+</section>
+<section id="id21">
+<h3>Returns<a class="headerlink" href="#id21" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>prediction<span class="classifier">Any</span></dt><dd><p>The predicted class for the given input.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="treeModels.base_tree.DecisionTree.walkthrough_proba">
+<span class="sig-name descname"><span class="pre">walkthrough_proba</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.DecisionTree.walkthrough_proba" title="Link to this definition"></a></dt>
+<dd><p>Walks through the tree to get the class proportions based on the given input.</p>
+<section id="id22">
+<h3>Parameters<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>X<span class="classifier">ArrayLike</span></dt><dd><p>An array-like structure containing the input data.</p>
+</dd>
+</dl>
+</section>
+<section id="id23">
+<h3>Returns<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>class_proportions<span class="classifier">np.ndarray</span></dt><dd><p>The class proportions for the given input.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="treeModels.base_tree.NumericDecision">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">treeModels.base_tree.</span></span><span class="sig-name descname"><span class="pre">NumericDecision</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">atr_indx</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">atr_label</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.base_tree.NumericDecision" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference internal" href="#treeModels.base_tree.BaseDecision" title="treeModels.base_tree.BaseDecision"><code class="xref py py-class docutils literal notranslate"><span class="pre">BaseDecision</span></code></a></p>
+<p>Decision-making class for numerical attributes based on a threshold value.</p>
+<section id="id24">
+<h3>Parameters<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>atr_indx<span class="classifier">int</span></dt><dd><p>Index of the attribute based on which the decision is made.</p>
 </dd>
@@ -428,8 +511,8 @@
 <dt class="sig sig-object py" id="treeModels.base_tree.NumericDecision.copy">
 <span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#treeModels.base_tree.NumericDecision" title="treeModels.base_tree.NumericDecision"><span class="pre">NumericDecision</span></a></span></span><a class="headerlink" href="#treeModels.base_tree.NumericDecision.copy" title="Link to this definition"></a></dt>
 <dd><p>Creates a copy of the NumericDecision instance.</p>
-<section id="id19">
-<h4>Returns<a class="headerlink" href="#id19" title="Link to this heading"></a></h4>
+<section id="id25">
+<h4>Returns<a class="headerlink" href="#id25" title="Link to this heading"></a></h4>
 <dl class="simple">
 <dt>decision_copy<span class="classifier">NumericDecision</span></dt><dd><p>A copy of the current NumericDecision instance.</p>
 </dd>
@@ -441,15 +524,15 @@
 <dt class="sig sig-object py" id="treeModels.base_tree.NumericDecision.make_choice">
 <span class="sig-name descname"><span class="pre">make_choice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#treeModels.base_tree.NumericDecision.make_choice" title="Link to this definition"></a></dt>
 <dd><p>Makes a decision based on whether the attribute value is less than or equal to the threshold.</p>
-<section id="id20">
-<h4>Parameters<a class="headerlink" href="#id20" title="Link to this heading"></a></h4>
+<section id="id26">
+<h4>Parameters<a class="headerlink" href="#id26" title="Link to this heading"></a></h4>
 <dl class="simple">
 <dt>X<span class="classifier">ArrayLike</span></dt><dd><p>Array-like structure containing the data for making the decision.</p>
 </dd>
 </dl>
 </section>
-<section id="id21">
-<h4>Returns<a class="headerlink" href="#id21" title="Link to this heading"></a></h4>
+<section id="id27">
+<h4>Returns<a class="headerlink" href="#id27" title="Link to this heading"></a></h4>
 <dl class="simple">
 <dt>choice<span class="classifier">str</span></dt><dd><p>The decision made based on whether the attribute value is less than or equal to the threshold.</p>
 </dd>
@@ -464,9 +547,45 @@
 <section id="module-treeModels.decision_algorithms">
 <span id="treemodels-decision-algorithms-module"></span><h2>treeModels.decision_algorithms module<a class="headerlink" href="#module-treeModels.decision_algorithms" title="Link to this heading"></a></h2>
 <dl class="py class">
+<dt class="sig sig-object py" id="treeModels.decision_algorithms.ColumnTypes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">ColumnTypes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.decision_algorithms.ColumnTypes" title="Link to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>Enum representing the types of columns in a dataset.</p>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>NUMERIC<span class="classifier">str</span></dt><dd><p>Represents numeric columns.</p>
+</dd>
+<dt>CATEGORIC<span class="classifier">str</span></dt><dd><p>Represents categorical columns.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="treeModels.decision_algorithms.ColumnTypes.CATEGORIC">
+<span class="sig-name descname"><span class="pre">CATEGORIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Categoric'</span></em><a class="headerlink" href="#treeModels.decision_algorithms.ColumnTypes.CATEGORIC" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="treeModels.decision_algorithms.ColumnTypes.NUMERIC">
+<span class="sig-name descname"><span class="pre">NUMERIC</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'Numeric'</span></em><a class="headerlink" href="#treeModels.decision_algorithms.ColumnTypes.NUMERIC" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="treeModels.decision_algorithms.DecisionAlgorithm">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">DecisionAlgorithm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.decision_algorithms.DecisionAlgorithm" title="Link to this definition"></a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<p>An enumeration for decision tree algorithms, providing partial functions
+for ID3 and C4.5 algorithms.</p>
+<section id="id28">
+<h3>Attributes<a class="headerlink" href="#id28" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>ID3<span class="classifier">partial</span></dt><dd><p>A partial function that applies the ID3 decision tree algorithm.</p>
+</dd>
+<dt>C45<span class="classifier">partial</span></dt><dd><p>A partial function that applies the C4.5 decision tree algorithm.</p>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="treeModels.decision_algorithms.DecisionAlgorithm.C45">
 <span class="sig-name descname"><span class="pre">C45</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">functools.partial(&lt;function</span> <span class="pre">c45&gt;)</span></em><a class="headerlink" href="#treeModels.decision_algorithms.DecisionAlgorithm.C45" title="Link to this definition"></a></dt>
@@ -477,26 +596,103 @@
 <span class="sig-name descname"><span class="pre">ID3</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">functools.partial(&lt;function</span> <span class="pre">id3&gt;)</span></em><a class="headerlink" href="#treeModels.decision_algorithms.DecisionAlgorithm.ID3" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
+</section>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="treeModels.decision_algorithms.c45">
-<span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">c45</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#treeModels.base_tree.BaseTree" title="treeModels.base_tree.BaseTree"><span class="pre">BaseTree</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.decision_algorithms.c45" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">c45</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#treeModels.base_tree.DecisionTree" title="treeModels.base_tree.DecisionTree"><span class="pre">DecisionTree</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.decision_algorithms.c45" title="Link to this definition"></a></dt>
+<dd><p>Constructs a decision tree using the C4.5 algorithm.</p>
+<section id="id29">
+<h3>Parameters<a class="headerlink" href="#id29" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>current_node<span class="classifier">DecisionTree</span></dt><dd><p>The current node in the decision tree where the decision and splits will be made.</p>
+</dd>
+<dt>params<span class="classifier">dict</span></dt><dd><dl class="simple">
+<dt>A dictionary of parameters for the tree construction, including:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>‘max_depth’: int</dt><dd><p>The maximum depth the tree is allowed to grow.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>‘min_samples_split’: int</dt><dd><p>The minimum number of samples required to split an internal node.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>‘min_samples_leaf’: int</dt><dd><p>The minimum number of samples that a leaf node must have.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>‘min_impurity_decrease’: float</dt><dd><p>The minimum impurity decrease required to perform a split.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>labels<span class="classifier">ArrayLike</span></dt><dd><p>The labels or names of the features used in the dataset.</p>
+</dd>
+<dt>current_height<span class="classifier">int, optional</span></dt><dd><p>The current depth or height of the node in the tree, by default 1.</p>
+</dd>
+</dl>
+</section>
+<section id="id30">
+<h3>Returns<a class="headerlink" href="#id30" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>None</dt><dd><p>This function modifies the tree in place by adding nodes and decisions.</p>
+</dd>
+</dl>
+</section>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h3>
+<p>The C4.5 algorithm is an extension of the ID3 algorithm that handles both categorical and continuous data.
+It creates a decision tree based on the highest gain ratio calculated from the features.</p>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="treeModels.decision_algorithms.create_categoric_matrix">
+<span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">create_categoric_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#treeModels.decision_algorithms.ColumnTypes" title="treeModels.decision_algorithms.ColumnTypes"><span class="pre">ColumnTypes</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#treeModels.decision_algorithms.create_categoric_matrix" title="Link to this definition"></a></dt>
+<dd><p>Transforms a dataset into a categoric matrix based on column types and corresponding thresholds.</p>
+<section id="id31">
+<h3>Parameters<a class="headerlink" href="#id31" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>X<span class="classifier">MatrixLike</span></dt><dd><p>The dataset represented as a matrix-like array, where each column is a feature.</p>
+</dd>
+<dt>Y<span class="classifier">ArrayLike</span></dt><dd><p>The target values corresponding to the feature columns.</p>
+</dd>
+<dt>types<span class="classifier">list[ColumnTypes]</span></dt><dd><p>A list of column types indicating whether each column is numeric or categoric.</p>
+</dd>
+</dl>
+</section>
+<section id="id32">
+<h3>Returns<a class="headerlink" href="#id32" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>categoric_matrix<span class="classifier">MatrixLike</span></dt><dd><p>The transformed categoric matrix where numeric columns are binarized based on thresholds.</p>
+</dd>
+<dt>umbrals<span class="classifier">dict[int, float]</span></dt><dd><p>A dictionary mapping column indices to their respective thresholds for numeric columns.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="treeModels.decision_algorithms.entropy">
 <span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">entropy</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#treeModels.decision_algorithms.entropy" title="Link to this definition"></a></dt>
 <dd><p>Calculates the entropy of a given target array.</p>
-<section id="id22">
-<h3>Parameters<a class="headerlink" href="#id22" title="Link to this heading"></a></h3>
+<section id="id33">
+<h3>Parameters<a class="headerlink" href="#id33" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>Y: ArrayLike </dt><dd><p>Target column to calculate the entropy of.</p>
 </dd>
 </dl>
 </section>
-<section id="id23">
-<h3>Returns<a class="headerlink" href="#id23" title="Link to this heading"></a></h3>
+<section id="id34">
+<h3>Returns<a class="headerlink" href="#id34" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>entropy: </dt><dd><p>Entropy value of the given column.</p>
 </dd>
@@ -505,16 +701,131 @@
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="treeModels.decision_algorithms.gain_ratio">
+<span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">gain_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#treeModels.decision_algorithms.gain_ratio" title="Link to this definition"></a></dt>
+<dd><p>Calculates the gain ratio for a given feature column.</p>
+<section id="id35">
+<h3>Parameters<a class="headerlink" href="#id35" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>col_values<span class="classifier">ArrayLike</span></dt><dd><p>The values of the feature column being evaluated.</p>
+</dd>
+<dt>Y<span class="classifier">ArrayLike</span></dt><dd><p>The target values corresponding to the feature column.</p>
+</dd>
+</dl>
+</section>
+<section id="id36">
+<h3>Returns<a class="headerlink" href="#id36" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>gain_ratio<span class="classifier">float</span></dt><dd><p>The calculated gain ratio value.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="treeModels.decision_algorithms.get_col_types">
+<span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">get_col_types</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#treeModels.decision_algorithms.ColumnTypes" title="treeModels.decision_algorithms.ColumnTypes"><span class="pre">ColumnTypes</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#treeModels.decision_algorithms.get_col_types" title="Link to this definition"></a></dt>
+<dd><p>Determines the types of columns in a dataset.</p>
+<section id="id37">
+<h3>Parameters<a class="headerlink" href="#id37" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>X<span class="classifier">MatrixLike</span></dt><dd><p>The dataset represented as a matrix-like array, where each column is a feature.</p>
+</dd>
+</dl>
+</section>
+<section id="id38">
+<h3>Returns<a class="headerlink" href="#id38" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>types<span class="classifier">list of ColumnTypes</span></dt><dd><p>A list containing the type of each column in the dataset.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="treeModels.decision_algorithms.get_umbral">
+<span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">get_umbral</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#treeModels.decision_algorithms.get_umbral" title="Link to this definition"></a></dt>
+<dd><p>Finds the best threshold (umbral) for a given feature column that maximizes information gain.</p>
+<section id="id39">
+<h3>Parameters<a class="headerlink" href="#id39" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>X<span class="classifier">ArrayLike</span></dt><dd><p>The feature column values for which the best threshold is to be found.</p>
+</dd>
+<dt>Y<span class="classifier">ArrayLike</span></dt><dd><p>The target values corresponding to the feature column.</p>
+</dd>
+</dl>
+</section>
+<section id="id40">
+<h3>Returns<a class="headerlink" href="#id40" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>best_umbral<span class="classifier">float</span></dt><dd><p>The best threshold value that maximizes information gain.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="treeModels.decision_algorithms.get_umbral_candidates">
+<span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">get_umbral_candidates</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#treeModels.decision_algorithms.get_umbral_candidates" title="Link to this definition"></a></dt>
+<dd><p>Generates threshold candidates for a given feature column based on the target values.</p>
+<section id="id41">
+<h3>Parameters<a class="headerlink" href="#id41" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>X<span class="classifier">ArrayLike</span></dt><dd><p>The feature column values for which threshold candidates are to be generated.</p>
+</dd>
+<dt>Y<span class="classifier">ArrayLike</span></dt><dd><p>The target values corresponding to the feature column.</p>
+</dd>
+</dl>
+</section>
+<section id="id42">
+<h3>Returns<a class="headerlink" href="#id42" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>candidates<span class="classifier">list of float</span></dt><dd><p>A list of threshold candidates.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="treeModels.decision_algorithms.id3">
-<span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">id3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#treeModels.base_tree.BaseTree" title="treeModels.base_tree.BaseTree"><span class="pre">BaseTree</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.decision_algorithms.id3" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">id3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">current_node</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#treeModels.base_tree.DecisionTree" title="treeModels.base_tree.DecisionTree"><span class="pre">DecisionTree</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">current_height</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#treeModels.decision_algorithms.id3" title="Link to this definition"></a></dt>
+<dd><p>Recursively builds a decision tree using the ID3 algorithm.</p>
+<section id="id43">
+<h3>Parameters<a class="headerlink" href="#id43" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>current_node<span class="classifier">DecisionTree</span></dt><dd><p>The current node of the decision tree being constructed.</p>
+</dd>
+<dt>params<span class="classifier">dict</span></dt><dd><dl class="simple">
+<dt>Parameters for controlling the tree growth, including:</dt><dd><ul class="simple">
+<li><p>‘max_depth’: int, the maximum depth of the tree.</p></li>
+<li><p>‘min_samples_split’: int, the minimum number of samples required to split an internal node.</p></li>
+<li><p>‘min_samples_leaf’: int, the minimum number of samples required to be at a leaf node.</p></li>
+<li><p>‘min_impurity_decrease’: float, the minimum information gain required to make a split.</p></li>
+</ul>
+</dd>
+</dl>
+</dd>
+<dt>labels<span class="classifier">ArrayLike</span></dt><dd><p>An array-like structure containing the names or labels of the features.</p>
+</dd>
+<dt>current_height<span class="classifier">int, optional</span></dt><dd><p>The current height of the tree during the construction (default is 1).</p>
+</dd>
+</dl>
+</section>
+<section id="id44">
+<h3>Returns<a class="headerlink" href="#id44" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>None</dt><dd><p>This function modifies the tree in place and does not return a value.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="treeModels.decision_algorithms.information_gain">
 <span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">information_gain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#treeModels.decision_algorithms.information_gain" title="Link to this definition"></a></dt>
 <dd><p>Calculates the information gain of the given feature.</p>
-<section id="id24">
-<h3>Parameters<a class="headerlink" href="#id24" title="Link to this heading"></a></h3>
+<section id="id45">
+<h3>Parameters<a class="headerlink" href="#id45" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>col_values: ArrayLike</dt><dd><p>Array with values of a certain feature.</p>
 </dd>
@@ -522,10 +833,32 @@
 </dd>
 </dl>
 </section>
-<section id="id25">
-<h3>Returns<a class="headerlink" href="#id25" title="Link to this heading"></a></h3>
+<section id="id46">
+<h3>Returns<a class="headerlink" href="#id46" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>information_gain: float</dt><dd><p>Information gain value of the given feature.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="treeModels.decision_algorithms.max_gain_ratio">
+<span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">max_gain_ratio</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#treeModels.decision_algorithms.max_gain_ratio" title="Link to this definition"></a></dt>
+<dd><p>Finds the feature column with the maximum gain ratio.</p>
+<section id="id47">
+<h3>Parameters<a class="headerlink" href="#id47" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>X<span class="classifier">MatrixLike</span></dt><dd><p>Matrix-like array with feature values, where each column represents a feature.</p>
+</dd>
+<dt>Y<span class="classifier">ArrayLike</span></dt><dd><p>Array with target values.</p>
+</dd>
+</dl>
+</section>
+<section id="id48">
+<h3>Returns<a class="headerlink" href="#id48" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>maxim<span class="classifier">tuple[int, float]</span></dt><dd><p>A tuple containing the index of the feature with the highest gain ratio and the gain ratio value.</p>
 </dd>
 </dl>
 </section>
@@ -535,8 +868,8 @@
 <dt class="sig sig-object py" id="treeModels.decision_algorithms.max_information_gain">
 <span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">max_information_gain</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">X</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#treeModels.decision_algorithms.max_information_gain" title="Link to this definition"></a></dt>
 <dd><p>Calculates the information gain for each feature in the dataset and returns the feature with the maximum information gain.</p>
-<section id="id26">
-<h3>Parameters<a class="headerlink" href="#id26" title="Link to this heading"></a></h3>
+<section id="id49">
+<h3>Parameters<a class="headerlink" href="#id49" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>X: MatrixLike</dt><dd><p>Matrix-like array with feature values, where each column represents a feature.</p>
 </dd>
@@ -544,10 +877,32 @@
 </dd>
 </dl>
 </section>
-<section id="id27">
-<h3>Returns<a class="headerlink" href="#id27" title="Link to this heading"></a></h3>
+<section id="id50">
+<h3>Returns<a class="headerlink" href="#id50" title="Link to this heading"></a></h3>
 <dl class="simple">
 <dt>max_information_gain: tuple[int, float]</dt><dd><p>A tuple containing the index of the feature with the highest information gain and the information gain value.</p>
+</dd>
+</dl>
+</section>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="treeModels.decision_algorithms.split_info">
+<span class="sig-prename descclassname"><span class="pre">treeModels.decision_algorithms.</span></span><span class="sig-name descname"><span class="pre">split_info</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">col_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Y</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DataFrame</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#treeModels.decision_algorithms.split_info" title="Link to this definition"></a></dt>
+<dd><p>Calculates the split information (or intrinsic value) for a given feature column.</p>
+<section id="id51">
+<h3>Parameters<a class="headerlink" href="#id51" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>col_values<span class="classifier">ArrayLike</span></dt><dd><p>The values of the feature column being evaluated.</p>
+</dd>
+<dt>Y<span class="classifier">ArrayLike</span></dt><dd><p>The target values corresponding to the feature column.</p>
+</dd>
+</dl>
+</section>
+<section id="id52">
+<h3>Returns<a class="headerlink" href="#id52" title="Link to this heading"></a></h3>
+<dl class="simple">
+<dt>split_info<span class="classifier">float</span></dt><dd><p>The calculated split information value.</p>
 </dd>
 </dl>
 </section>
