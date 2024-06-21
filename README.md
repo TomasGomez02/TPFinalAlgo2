@@ -6,7 +6,7 @@
 Se desea construir una librería que permita construir modelos predictivos a través de una versión simplificada del ensamble RandomForest. El objetivo es entrenar un modelo con algún conjunto de datos etiquetados (aprendizaje supervisado) de forma que luego permita predecir la variable objetivo. En principio nos enfocaremos en problemas de clasificación, pudiendo extenderla a problemas de regresión eventualmente.
 
 ## Instalación
-<Gonza :D>
+Para instalar el módulo TreeModels, se debe descargar el repositorio de GitHub y desde la terminal o consola abrir la carpeta donde se haya guardado la descarga y ejecutar el comando 'pip install -e .' para instalar TreeModels
 
 ## Links útiles
 - [Documentación de Sklearn para estimadores compatibles.](https://scikit-learn.org/stable/developers/develop.html)
